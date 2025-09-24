@@ -3,7 +3,7 @@ import { ShoppingCart, Menu, X, Search } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
-
+import logo from "../assets/logo.png";
 interface HeaderProps {
   cartItemCount: number;
   onCartClick: () => void;
@@ -30,7 +30,10 @@ export function Header({
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-primary">FutbolShirt Store</h1>
+            <h1 className="text-primary flex">
+              <img className="object-contain w-14" src={logo} alt="" />
+              {/* Splaash ZN Store */}
+            </h1>
           </div>
 
           {/* Desktop Search */}

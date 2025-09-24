@@ -1,6 +1,6 @@
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-
+import heroImg from "../assets/heroPhoto.png";
 export function Hero() {
   return (
     <section
@@ -63,8 +63,7 @@ export function Hero() {
           <div className="relative">
             <div className="relative z-10">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1668791160369-d20b8175eab2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb290YmFsbCUyMGplcnNleSUyMHNvY2NlciUyMHNoaXJ0fGVufDF8fHx8MTc1ODY2MzAzNnww&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Camisetas de fútbol premium"
+                src={heroImg}
                 className="w-full h-96 lg:h-[500px] object-cover rounded-lg shadow-2xl"
               />
             </div>
