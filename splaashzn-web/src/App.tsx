@@ -5,7 +5,7 @@ import { ProductCatalog } from "./components/ProductCatalog.tsx";
 import { Cart, CartItem } from "./components/Cart.tsx";
 import { Footer } from "./components/Footer.tsx";
 import { Product } from "./components/ProductCard.tsx";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 // Mock data para los productos
 const mockProducts: Product[] = [
