@@ -17,7 +17,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3>FutbolShirt Store</h3>
+            <h3>Splaash Zone Store</h3>
             <p className="text-gray-300 text-sm">
               Tu tienda de confianza para las mejores camisetas de fútbol.
               Calidad premium, diseños auténticos y la pasión del fútbol en cada
@@ -101,14 +101,14 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Mail className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-300">info@futbolshirt.es</span>
+                <span className="text-gray-300">info@splaashzn.es</span>
               </div>
               <div className="flex items-start gap-3 text-sm">
                 <MapPin className="w-4 h-4 text-gray-400 mt-0.5" />
                 <span className="text-gray-300">
-                  Calle del Fútbol, 123
+                  Calle Joan Maragall, 123
                   <br />
-                  28001 Madrid, España
+                  08100 Barcelona, España
                 </span>
               </div>
             </div>
@@ -143,7 +143,7 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-sm text-gray-400">
-            © 2024 FutbolShirt Store. Todos los derechos reservados.
+            © 2024 Splaash Zone Store. Todos los derechos reservados.
           </div>
           <div className="flex items-center gap-6 text-sm text-gray-400">
             <span>Pago seguro</span>

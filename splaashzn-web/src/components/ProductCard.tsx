@@ -46,7 +46,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         </div>
 
         {/* Badges */}
-        <div className="absolute top-2 left-2 space-y-1">
+        <div className="absolute top-2 left-2 space-y-1 space-x-2">
           {product.isNew && (
             <Badge className="bg-green-500 hover:bg-green-600">Nuevo</Badge>
           )}
@@ -59,16 +59,17 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         <Button
           size="icon"
           variant="outline"
-          className="absolute top-2 right-2 bg-white/90 hover:bg-white opacity-0 group-hover:opacity-100 transition-opacity"
+          className="absolute top-2 right-2 bg-white/90 hover:bg-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
         >
           <Heart className="w-4 h-4" />
         </Button>
       </div>
 
       <CardContent className="p-4 space-y-3">
+        {/* <div className="relative"> */}
         <div className="space-y-1">
           <div className="text-sm text-muted-foreground">{product.league}</div>
-          <h3 className="line-clamp-2">{product.name}</h3>
+          <h3 className="line-clamp-1">{product.name}</h3>
           <div className="text-sm text-muted-foreground">{product.team}</div>
         </div>
 
@@ -86,11 +87,16 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
             Tallas: {product.sizes.join(", ")}
           </div>
         </div>
-
-        <Button className="w-full gap-2" onClick={handleAddToCart}>
+        {/* <div className="absolute bottom-0"> */}
+        <Button
+          className="w-full gap-2 cursor-pointer"
+          onClick={handleAddToCart}
+        >
           <ShoppingCart className="w-4 h-4" />
           Añadir al Carrito
         </Button>
+        {/* </div> */}
+        {/* </div> */}
       </CardContent>
     </Card>
   );

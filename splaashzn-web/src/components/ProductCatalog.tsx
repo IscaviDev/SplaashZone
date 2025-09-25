@@ -11,7 +11,7 @@ import {
 import { Input } from "./ui/input";
 import { Filter, Grid, List } from "lucide-react";
 import { Badge } from "./ui/badge";
-
+import { cn } from "./ui/utils";
 interface ProductCatalogProps {
   products: Product[];
   onAddToCart: (productId: string, size: string) => void;
@@ -112,7 +112,7 @@ export function ProductCatalog({
               <Button
                 variant="outline"
                 onClick={() => setShowFilters(!showFilters)}
-                className="gap-2"
+                className="gap-2 cursor-pointer"
               >
                 <Filter className="w-4 h-4" />
                 Filtros
@@ -139,6 +139,7 @@ export function ProductCatalog({
                   variant={viewMode === "grid" ? "default" : "outline"}
                   size="icon"
                   onClick={() => setViewMode("grid")}
+                  className={cn(viewMode === "grid" ? "" : "cursor-pointer")}
                 >
                   <Grid className="w-4 h-4" />
                 </Button>
@@ -146,6 +147,7 @@ export function ProductCatalog({
                   variant={viewMode === "list" ? "default" : "outline"}
                   size="icon"
                   onClick={() => setViewMode("list")}
+                  className={cn(viewMode === "list" ? "" : "cursor-pointer")}
                 >
                   <List className="w-4 h-4" />
                 </Button>

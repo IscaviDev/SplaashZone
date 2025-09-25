@@ -84,7 +84,7 @@ export function Header({
               variant="outline"
               size="icon"
               onClick={onCartClick}
-              className="relative"
+              className="relative cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5" />
               {cartItemCount > 0 && (

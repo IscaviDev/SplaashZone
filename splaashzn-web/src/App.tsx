@@ -14,7 +14,7 @@ const mockProducts: Product[] = [
     name: "Camiseta FC Barcelona 2024/25 Local",
     team: "FC Barcelona",
     league: "La Liga",
-    price: 89.99,
+    price: 10.86,
     originalPrice: 109.99,
     image:
       "https://images.unsplash.com/photo-1683142028215-8529d43701fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYXJjZWxvbmElMjBmb290YmFsbCUyMHNoaXJ0fGVufDF8fHx8MTc1ODY2MzAzN3ww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -38,7 +38,7 @@ const mockProducts: Product[] = [
     name: "Camiseta Manchester United 2024/25 Local",
     team: "Manchester United",
     league: "Premier League",
-    price: 79.99,
+    price: 12.56,
     originalPrice: 99.99,
     image:
       "https://images.unsplash.com/photo-1662096909687-7c64cde3524b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYW5jaGVzdGVyJTIwdW5pdGVkJTIwc2hpcnR8ZW58MXx8fHwxNzU4NjMwNjM4fDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -68,10 +68,10 @@ const mockProducts: Product[] = [
   },
   {
     id: "6",
-    name: "Camiseta Arsenal 2024/25 Local",
+    name: "Camiseta retro Arsenal 2024/25 Local",
     team: "Arsenal",
     league: "Premier League",
-    price: 76.99,
+    price: 12.98,
     originalPrice: 89.99,
     image:
       "https://images.unsplash.com/photo-1668791160369-d20b8175eab2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb290YmFsbCUyMGplcnNleSUyMHNvY2NlciUyMHNoaXJ0fGVufDF8fHx8MTc1ODY2MzAzNnww&ixlib=rb-4.1.0&q=80&w=1080",

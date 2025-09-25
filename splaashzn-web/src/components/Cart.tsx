@@ -44,12 +44,14 @@ export function Cart({
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-  const shipping = totalPrice > 50 ? 0 : 5.99;
+  // const shipping = totalPrice > 50 ? 0 : 5.99;
+  const shipping = totalItems * 2.13;
+  const taxes = totalItems * 0.55;
   const finalTotal = totalPrice + shipping;
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
-      <SheetContent className="flex flex-col w-full sm:max-w-lg">
+      <SheetContent className="flex flex-col sm:max-w-lg px-4 py-4 w-full">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
             <ShoppingBag className="w-5 h-5" />
@@ -68,7 +70,10 @@ export function Cart({
                   Añade algunos productos para comenzar tu compra
                 </p>
               </div>
-              <Button onClick={() => onOpenChange(false)}>
+              <Button
+                className="cursor-pointer"
+                onClick={() => onOpenChange(false)}
+              >
                 Continuar Comprando
               </Button>
             </div>
@@ -136,7 +141,7 @@ export function Cart({
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="h-8 w-8 text-muted-foreground hover:text-destructive"
+                    className="h-8 w-8 text-muted-foreground hover:text-destructive cursor-pointer"
                     onClick={() => onRemoveItem(item.id)}
                   >
                     <X className="w-4 h-4" />
@@ -148,7 +153,7 @@ export function Cart({
         </div>
 
         {items.length > 0 && (
-          <div className="border-t pt-4 space-y-4">
+          <div className="border-t pt-4 space-y-4 space-x-4">
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span>Subtotal ({totalItems} artículos)</span>
@@ -156,15 +161,12 @@ export function Cart({
               </div>
               <div className="flex justify-between text-sm">
                 <span>Envío</span>
-                <span>
-                  {shipping === 0 ? "Gratis" : `€${shipping.toFixed(2)}`}
-                </span>
+                <span>{`€${shipping.toFixed(2)}`}</span>
               </div>
-              {shipping === 0 && (
-                <p className="text-xs text-green-600">
-                  ¡Envío gratis en pedidos superiores a €50!
-                </p>
-              )}
+              <div className="flex justify-between text-sm">
+                <span>Impuestos</span>
+                <span>{`€${taxes.toFixed(2)}`}</span>
+              </div>
               <Separator />
               <div className="flex justify-between">
                 <span>Total</span>
@@ -173,12 +175,16 @@ export function Cart({
             </div>
 
             <div className="space-y-2">
-              <Button className="w-full" size="lg" onClick={onCheckout}>
+              <Button
+                className="w-full cursor-pointer"
+                size="lg"
+                onClick={onCheckout}
+              >
                 Proceder al Pago
               </Button>
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full cursor-pointer"
                 onClick={() => onOpenChange(false)}
               >
                 Continuar Comprando

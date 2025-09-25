@@ -26,7 +26,7 @@ export function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
-                className="bg-yellow-500 hover:bg-yellow-600 text-black"
+                className="bg-yellow-500 hover:bg-yellow-600 text-black cursor-pointer"
                 onClick={() =>
                   document
                     .getElementById("products")
@@ -38,7 +38,7 @@ export function Hero() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-blue-600"
+                className="border-white hover:bg-gray-300 text-blue-600 hover:text-blue-600 cursor-pointer"
               >
                 Ofertas Especiales
               </Button>
@@ -67,9 +67,9 @@ export function Hero() {
                 className="w-full h-96 lg:h-[500px] object-cover rounded-lg shadow-2xl"
               />
             </div>
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center z-20">
+            {/* <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center z-20">
               <span className="text-black text-sm">-20%</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
