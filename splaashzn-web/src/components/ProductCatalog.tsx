@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { ProductCard, Product } from "./ProductCard";
+import { ProductCard, Product, ProductCartItem } from "./ProductCard";
 import { Button } from "./ui/button";
 import {
   Select,
@@ -8,19 +8,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { Input } from "./ui/input";
+
 import { Filter, Grid, List } from "lucide-react";
 import { Badge } from "./ui/badge";
-import { cn } from "./ui/utils";
+import { useTranslation } from "./hooks/useTranslation";
+
 interface ProductCatalogProps {
   products: Product[];
-  onAddToCart: (productId: string, size: string) => void;
+  onAddToCart: (item: ProductCartItem) => void;
+  onToggleFavorite: (productId: string) => void;
+  isFavorite: (productId: string) => boolean;
   searchQuery: string;
 }
 
 export function ProductCatalog({
   products,
   onAddToCart,
+  onToggleFavorite,
+  isFavorite,
   searchQuery,
 }: ProductCatalogProps) {
   const [selectedLeague, setSelectedLeague] = useState<string>("all");
@@ -28,6 +33,7 @@ export function ProductCatalog({
   const [sortBy, setSortBy] = useState<string>("name");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [showFilters, setShowFilters] = useState(false);
+  const { t } = useTranslation();
 
   // Get unique leagues and teams
   const leagues = useMemo(() => {
@@ -98,10 +104,9 @@ export function ProductCatalog({
     <section id="products" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="mb-4">Nuestro Catálogo</h2>
+          <h2 className="mb-4">{t.catalogTitle}</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Explora nuestra amplia selección de camisetas oficiales de los
-            mejores equipos del mundo
+            {t.catalogDescription}
           </p>
         </div>
 
@@ -112,10 +117,10 @@ export function ProductCatalog({
               <Button
                 variant="outline"
                 onClick={() => setShowFilters(!showFilters)}
-                className="gap-2 cursor-pointer"
+                className="gap-2"
               >
                 <Filter className="w-4 h-4" />
-                Filtros
+                {t.filters}
               </Button>
 
               {hasActiveFilters && (
@@ -124,7 +129,7 @@ export function ProductCatalog({
                   onClick={clearFilters}
                   className="text-sm"
                 >
-                  Limpiar filtros
+                  {t.clearFilters}
                 </Button>
               )}
             </div>
@@ -139,7 +144,6 @@ export function ProductCatalog({
                   variant={viewMode === "grid" ? "default" : "outline"}
                   size="icon"
                   onClick={() => setViewMode("grid")}
-                  className={cn(viewMode === "grid" ? "" : "cursor-pointer")}
                 >
                   <Grid className="w-4 h-4" />
                 </Button>
@@ -147,7 +151,6 @@ export function ProductCatalog({
                   variant={viewMode === "list" ? "default" : "outline"}
                   size="icon"
                   onClick={() => setViewMode("list")}
-                  className={cn(viewMode === "list" ? "" : "cursor-pointer")}
                 >
                   <List className="w-4 h-4" />
                 </Button>
@@ -159,16 +162,16 @@ export function ProductCatalog({
           {showFilters && (
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-white rounded-lg border">
               <div>
-                <label className="block text-sm mb-2">Liga</label>
+                <label className="block text-sm mb-2">{t.league}</label>
                 <Select
                   value={selectedLeague}
                   onValueChange={setSelectedLeague}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Todas las ligas" />
+                    <SelectValue placeholder={t.allLeagues} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">Todas las ligas</SelectItem>
+                    <SelectItem value="all">{t.allLeagues}</SelectItem>
                     {leagues.map((league) => (
                       <SelectItem key={league} value={league}>
                         {league}
@@ -179,13 +182,13 @@ export function ProductCatalog({
               </div>
 
               <div>
-                <label className="block text-sm mb-2">Equipo</label>
+                <label className="block text-sm mb-2">{t.team}</label>
                 <Select value={selectedTeam} onValueChange={setSelectedTeam}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Todos los equipos" />
+                    <SelectValue placeholder={t.allTeams} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">Todos los equipos</SelectItem>
+                    <SelectItem value="all">{t.allTeams}</SelectItem>
                     {teams.map((team) => (
                       <SelectItem key={team} value={team}>
                         {team}
@@ -196,20 +199,16 @@ export function ProductCatalog({
               </div>
 
               <div>
-                <label className="block text-sm mb-2">Ordenar por</label>
+                <label className="block text-sm mb-2">{t.sortBy}</label>
                 <Select value={sortBy} onValueChange={setSortBy}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="name">Nombre</SelectItem>
-                    <SelectItem value="team">Equipo</SelectItem>
-                    <SelectItem value="price-low">
-                      Precio: Menor a Mayor
-                    </SelectItem>
-                    <SelectItem value="price-high">
-                      Precio: Mayor a Menor
-                    </SelectItem>
+                    <SelectItem value="name">{t.name}</SelectItem>
+                    <SelectItem value="team">{t.team}</SelectItem>
+                    <SelectItem value="price-low">{t.priceLowest}</SelectItem>
+                    <SelectItem value="price-high">{t.priceHighest}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -221,7 +220,7 @@ export function ProductCatalog({
             <div className="flex flex-wrap gap-2">
               {selectedLeague !== "all" && (
                 <Badge variant="secondary" className="gap-1">
-                  Liga: {selectedLeague}
+                  {t.league}: {selectedLeague}
                   <button
                     onClick={() => setSelectedLeague("all")}
                     className="ml-1 hover:text-red-500"
@@ -232,7 +231,7 @@ export function ProductCatalog({
               )}
               {selectedTeam !== "all" && (
                 <Badge variant="secondary" className="gap-1">
-                  Equipo: {selectedTeam}
+                  {t.team}: {selectedTeam}
                   <button
                     onClick={() => setSelectedTeam("all")}
                     className="ml-1 hover:text-red-500"
@@ -259,17 +258,16 @@ export function ProductCatalog({
                 key={product.id}
                 product={product}
                 onAddToCart={onAddToCart}
+                onToggleFavorite={onToggleFavorite}
+                isFavorite={isFavorite(product.id)}
               />
             ))}
           </div>
         ) : (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">
-              No se encontraron productos que coincidan con los filtros
-              seleccionados.
-            </p>
+            <p className="text-muted-foreground">{t.noProducts}</p>
             <Button variant="outline" onClick={clearFilters} className="mt-4">
-              Mostrar todos los productos
+              {t.showAllProducts}
             </Button>
           </div>
         )}

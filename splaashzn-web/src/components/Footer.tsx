@@ -1,48 +1,29 @@
-import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Mail,
-  Phone,
-  MapPin,
-} from "lucide-react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Separator } from "./ui/separator";
+import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Separator } from './ui/separator';
+import { useTranslation } from './hooks/useTranslation';
 
 export function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3>Splaash Zone Store</h3>
+            <h3>FutbolShirt Store</h3>
             <p className="text-gray-300 text-sm">
-              Tu tienda de confianza para las mejores camisetas de fútbol.
-              Calidad premium, diseños auténticos y la pasión del fútbol en cada
-              producto.
+              {t.companyDescription}
             </p>
             <div className="flex space-x-4">
-              <Button
-                size="icon"
-                variant="ghost"
-                className="text-gray-400 hover:text-white"
-              >
+              <Button size="icon" variant="ghost" className="text-gray-400 hover:text-white">
                 <Facebook className="w-5 h-5" />
               </Button>
-              <Button
-                size="icon"
-                variant="ghost"
-                className="text-gray-400 hover:text-white"
-              >
+              <Button size="icon" variant="ghost" className="text-gray-400 hover:text-white">
                 <Twitter className="w-5 h-5" />
               </Button>
-              <Button
-                size="icon"
-                variant="ghost"
-                className="text-gray-400 hover:text-white"
-              >
+              <Button size="icon" variant="ghost" className="text-gray-400 hover:text-white">
                 <Instagram className="w-5 h-5" />
               </Button>
             </div>
@@ -50,50 +31,32 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4>Enlaces Rápidos</h4>
+            <h4>{t.quickLinks}</h4>
             <nav className="flex flex-col space-y-2">
-              <a
-                href="#home"
-                className="text-gray-300 hover:text-white transition-colors text-sm"
-              >
-                Inicio
+              <a href="#home" className="text-gray-300 hover:text-white transition-colors text-sm">
+                {t.home}
               </a>
-              <a
-                href="#products"
-                className="text-gray-300 hover:text-white transition-colors text-sm"
-              >
-                Productos
+              <a href="#products" className="text-gray-300 hover:text-white transition-colors text-sm">
+                {t.products}
               </a>
-              <a
-                href="#about"
-                className="text-gray-300 hover:text-white transition-colors text-sm"
-              >
-                Nosotros
+              <a href="#about" className="text-gray-300 hover:text-white transition-colors text-sm">
+                {t.about}
               </a>
-              <a
-                href="#contact"
-                className="text-gray-300 hover:text-white transition-colors text-sm"
-              >
-                Contacto
+              <a href="#contact" className="text-gray-300 hover:text-white transition-colors text-sm">
+                {t.contact}
               </a>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white transition-colors text-sm"
-              >
-                Términos y Condiciones
+              <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
+                {t.termsConditions}
               </a>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white transition-colors text-sm"
-              >
-                Política de Privacidad
+              <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
+                {t.privacyPolicy}
               </a>
             </nav>
           </div>
 
           {/* Customer Service */}
           <div className="space-y-4">
-            <h4>Atención al Cliente</h4>
+            <h4>{t.customerService}</h4>
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm">
                 <Phone className="w-4 h-4 text-gray-400" />
@@ -101,40 +64,40 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Mail className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-300">info@splaashzn.es</span>
+                <span className="text-gray-300">info@futbolshirt.es</span>
               </div>
               <div className="flex items-start gap-3 text-sm">
                 <MapPin className="w-4 h-4 text-gray-400 mt-0.5" />
                 <span className="text-gray-300">
-                  Calle Joan Maragall, 123
-                  <br />
-                  08100 Barcelona, España
+                  Calle del Fútbol, 123<br />
+                  28001 Madrid, España
                 </span>
               </div>
             </div>
             <div className="text-sm text-gray-400">
-              <p>Lunes - Viernes: 9:00 - 18:00</p>
-              <p>Sábados: 10:00 - 14:00</p>
+              <p>{t.mondayFriday}</p>
+              <p>{t.saturday}</p>
             </div>
           </div>
 
           {/* Newsletter */}
           <div className="space-y-4">
-            <h4>Newsletter</h4>
+            <h4>{t.newsletter}</h4>
             <p className="text-gray-300 text-sm">
-              Suscríbete para recibir ofertas exclusivas y novedades.
+              {t.newsletterDescription}
             </p>
             <div className="space-y-2">
               <Input
                 type="email"
-                placeholder="tu@email.com"
+                placeholder={t.emailPlaceholder}
                 className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-400"
               />
-              <Button className="w-full">Suscribirse</Button>
+              <Button className="w-full">
+                {t.subscribe}
+              </Button>
             </div>
             <p className="text-xs text-gray-400">
-              Al suscribirte, aceptas recibir emails promocionales. Puedes darte
-              de baja en cualquier momento.
+              {t.subscribeDisclaimer}
             </p>
           </div>
         </div>
@@ -143,12 +106,12 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-sm text-gray-400">
-            © 2024 Splaash Zone Store. Todos los derechos reservados.
+            © 2024 FutbolShirt Store. {t.allRightsReserved}
           </div>
           <div className="flex items-center gap-6 text-sm text-gray-400">
-            <span>Pago seguro</span>
-            <span>Envío rápido</span>
-            <span>Devoluciones fáciles</span>
+            <span>{t.securePayment}</span>
+            <span>{t.fastShipping}</span>
+            <span>{t.easyReturns}</span>
           </div>
         </div>
       </div>

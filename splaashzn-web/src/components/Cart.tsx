@@ -1,24 +1,20 @@
 import { X, Plus, Minus, ShoppingBag } from "lucide-react";
 import { Button } from "./ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "./ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
 import { Separator } from "./ui/separator";
 import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { useTranslation } from "./hooks/useTranslation";
 
 export interface CartItem {
   id: string;
-  productId: string;
   name: string;
   team: string;
+  league: string;
   price: number;
   image: string;
   size: string;
+  personalization: string;
   quantity: number;
 }
 
@@ -39,23 +35,22 @@ export function Cart({
   onRemoveItem,
   onCheckout,
 }: CartProps) {
+  const { t } = useTranslation();
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-  // const shipping = totalPrice > 50 ? 0 : 5.99;
-  const shipping = totalItems * 2.13;
-  const taxes = totalItems * 0.55;
+  const shipping = totalPrice > 50 ? 0 : 5.99;
   const finalTotal = totalPrice + shipping;
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
-      <SheetContent className="flex flex-col sm:max-w-lg px-4 py-4 w-full">
+      <SheetContent className="flex flex-col w-full sm:max-w-lg">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
             <ShoppingBag className="w-5 h-5" />
-            Carrito de Compras
+            {t.cart}
             {totalItems > 0 && <Badge variant="secondary">{totalItems}</Badge>}
           </SheetTitle>
         </SheetHeader>
@@ -65,16 +60,13 @@ export function Cart({
             <div className="flex flex-col items-center justify-center h-full text-center space-y-4">
               <ShoppingBag className="w-16 h-16 text-muted-foreground" />
               <div className="space-y-2">
-                <h3>Tu carrito está vacío</h3>
+                <h3>{t.cartEmpty}</h3>
                 <p className="text-muted-foreground">
-                  Añade algunos productos para comenzar tu compra
+                  {t.cartEmptyDescription}
                 </p>
               </div>
-              <Button
-                className="cursor-pointer"
-                onClick={() => onOpenChange(false)}
-              >
-                Continuar Comprando
+              <Button onClick={() => onOpenChange(false)}>
+                {t.continueShopping}
               </Button>
             </div>
           ) : (
@@ -96,8 +88,14 @@ export function Cart({
                         {item.team}
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        Talla: {item.size}
+                        {t.common.size}: {item.size}
                       </p>
+                      {item.personalization !==
+                        t.product.personalizationOptions.none && (
+                        <p className="text-sm text-blue-600">
+                          {item.personalization}
+                        </p>
+                      )}
                     </div>
 
                     <div className="flex items-center justify-between">
@@ -141,7 +139,7 @@ export function Cart({
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="h-8 w-8 text-muted-foreground hover:text-destructive cursor-pointer"
+                    className="h-8 w-8 text-muted-foreground hover:text-destructive"
                     onClick={() => onRemoveItem(item.id)}
                   >
                     <X className="w-4 h-4" />
@@ -153,41 +151,42 @@ export function Cart({
         </div>
 
         {items.length > 0 && (
-          <div className="border-t pt-4 space-y-4 space-x-4">
+          <div className="border-t pt-4 space-y-4">
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span>Subtotal ({totalItems} artículos)</span>
+                <span>
+                  {t.subtotal} ({totalItems} {t.items})
+                </span>
                 <span>€{totalPrice.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span>Envío</span>
-                <span>{`€${shipping.toFixed(2)}`}</span>
+                <span>{t.shipping}</span>
+                <span>
+                  {shipping === 0 ? t.free : `€${shipping.toFixed(2)}`}
+                </span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span>Impuestos</span>
-                <span>{`€${taxes.toFixed(2)}`}</span>
-              </div>
+              {shipping === 0 && (
+                <p className="text-xs text-green-600">
+                  {t.freeShippingMessage}
+                </p>
+              )}
               <Separator />
               <div className="flex justify-between">
-                <span>Total</span>
+                <span>{t.total}</span>
                 <span>€{finalTotal.toFixed(2)}</span>
               </div>
             </div>
 
             <div className="space-y-2">
-              <Button
-                className="w-full cursor-pointer"
-                size="lg"
-                onClick={onCheckout}
-              >
-                Proceder al Pago
+              <Button className="w-full" size="lg" onClick={onCheckout}>
+                {t.checkoutButton}
               </Button>
               <Button
                 variant="outline"
-                className="w-full cursor-pointer"
+                className="w-full"
                 onClick={() => onOpenChange(false)}
               >
-                Continuar Comprando
+                {t.continueShopping}
               </Button>
             </div>
           </div>
