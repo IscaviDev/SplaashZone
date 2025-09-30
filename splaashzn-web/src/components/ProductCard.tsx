@@ -190,7 +190,7 @@ export function ProductCard({
       <CardContent className="p-4 space-y-3">
         <div className="space-y-1">
           <div className="text-sm text-muted-foreground">{product.league}</div>
-          <h3 className="line-clamp-2">{product.name}</h3>
+          <h3 className="line-clamp-1">{product.name}</h3>
           <div className="text-sm text-muted-foreground">{product.team}</div>
         </div>
 

@@ -1,11 +1,25 @@
-import { useState } from 'react';
-import { ShoppingCart, Menu, X, Search, Heart, Globe, User } from 'lucide-react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Badge } from './ui/badge';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
-import { useTranslation, Language } from './hooks/useTranslation';
-import { useAuth } from './hooks/useAuth';
+import { useState } from "react";
+import {
+  ShoppingCart,
+  Menu,
+  X,
+  Search,
+  Heart,
+  Globe,
+  User,
+} from "lucide-react";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Badge } from "./ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { useTranslation, Language } from "./hooks/useTranslation";
+import { useAuth } from "./hooks/useAuth";
+import logo from "../assets/logo.png";
 
 interface HeaderProps {
   cartItemCount: number;
@@ -16,9 +30,16 @@ interface HeaderProps {
   onAuthClick: () => void;
 }
 
-export function Header({ cartItemCount, favoritesCount, onCartClick, onFavoritesClick, onSearchChange, onAuthClick }: HeaderProps) {
+export function Header({
+  cartItemCount,
+  favoritesCount,
+  onCartClick,
+  onFavoritesClick,
+  onSearchChange,
+  onAuthClick,
+}: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const { t, language, switchLanguage } = useTranslation();
   const { user, logout } = useAuth();
 
@@ -38,7 +59,9 @@ export function Header({ cartItemCount, favoritesCount, onCartClick, onFavorites
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-primary">FutbolShirt Store</h1>
+            <h1 className="text-primary">
+              <img className="object-contain w-14" src={logo} alt="" />
+            </h1>
           </div>
 
           {/* Desktop Search */}
@@ -58,25 +81,41 @@ export function Header({ cartItemCount, favoritesCount, onCartClick, onFavorites
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             <button
-              onClick={() => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document
+                  .getElementById("home")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
               className="text-foreground hover:text-primary transition-colors"
             >
               {t.home}
             </button>
             <button
-              onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document
+                  .getElementById("products")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
               className="text-foreground hover:text-primary transition-colors"
             >
               {t.products}
             </button>
             <button
-              onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document
+                  .getElementById("about")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
               className="text-foreground hover:text-primary transition-colors"
             >
               {t.about}
             </button>
             <button
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document
+                  .getElementById("contact")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
               className="text-foreground hover:text-primary transition-colors"
             >
               {t.contact}
@@ -86,7 +125,7 @@ export function Header({ cartItemCount, favoritesCount, onCartClick, onFavorites
           {/* Language Switcher, User, Favorites, Cart and Mobile Menu */}
           <div className="flex items-center space-x-2">
             {/* Language Switcher */}
-            <div className="hidden sm:flex items-center space-x-1">
+            {/* <div className="hidden sm:flex items-center space-x-1">
               <Button
                 variant={language === 'es' ? 'default' : 'ghost'}
                 size="sm"
@@ -103,7 +142,7 @@ export function Header({ cartItemCount, favoritesCount, onCartClick, onFavorites
               >
                 EN
               </Button>
-            </div>
+            </div> */}
 
             {/* User Account */}
             {user ? (
@@ -114,20 +153,14 @@ export function Header({ cartItemCount, favoritesCount, onCartClick, onFavorites
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem disabled>
-                    {user.name}
-                  </DropdownMenuItem>
+                  <DropdownMenuItem disabled>{user.name}</DropdownMenuItem>
                   <DropdownMenuItem onClick={logout}>
                     {t.auth.logout}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={onAuthClick}
-              >
+              <Button variant="outline" size="icon" onClick={onAuthClick}>
                 <User className="w-5 h-5" />
               </Button>
             )}
@@ -169,7 +202,11 @@ export function Header({ cartItemCount, favoritesCount, onCartClick, onFavorites
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </Button>
           </div>
         </div>
@@ -196,7 +233,9 @@ export function Header({ cartItemCount, favoritesCount, onCartClick, onFavorites
                 className="text-foreground hover:text-primary transition-colors text-left"
                 onClick={() => {
                   setIsMenuOpen(false);
-                  document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+                  document
+                    .getElementById("home")
+                    ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
                 {t.home}
@@ -205,7 +244,9 @@ export function Header({ cartItemCount, favoritesCount, onCartClick, onFavorites
                 className="text-foreground hover:text-primary transition-colors text-left"
                 onClick={() => {
                   setIsMenuOpen(false);
-                  document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+                  document
+                    .getElementById("products")
+                    ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
                 {t.products}
@@ -214,7 +255,9 @@ export function Header({ cartItemCount, favoritesCount, onCartClick, onFavorites
                 className="text-foreground hover:text-primary transition-colors text-left"
                 onClick={() => {
                   setIsMenuOpen(false);
-                  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                  document
+                    .getElementById("about")
+                    ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
                 {t.about}
@@ -223,28 +266,30 @@ export function Header({ cartItemCount, favoritesCount, onCartClick, onFavorites
                 className="text-foreground hover:text-primary transition-colors text-left"
                 onClick={() => {
                   setIsMenuOpen(false);
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
                 {t.contact}
               </button>
             </nav>
-            
+
             {/* Mobile Language Switcher */}
             <div className="flex items-center justify-center space-x-2 pt-4 border-t">
               <Globe className="w-4 h-4 text-muted-foreground" />
               <Button
-                variant={language === 'es' ? 'default' : 'ghost'}
+                variant={language === "es" ? "default" : "ghost"}
                 size="sm"
-                onClick={() => handleLanguageSwitch('es')}
+                onClick={() => handleLanguageSwitch("es")}
                 className="h-8 px-3"
               >
                 Español
               </Button>
               <Button
-                variant={language === 'en' ? 'default' : 'ghost'}
+                variant={language === "en" ? "default" : "ghost"}
                 size="sm"
-                onClick={() => handleLanguageSwitch('en')}
+                onClick={() => handleLanguageSwitch("en")}
                 className="h-8 px-3"
               >
                 English

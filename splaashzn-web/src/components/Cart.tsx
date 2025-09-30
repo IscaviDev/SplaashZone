@@ -41,12 +41,13 @@ export function Cart({
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-  const shipping = totalPrice > 50 ? 0 : 5.99;
+  const shipping = 2.5 * totalItems;
+  const taxes = 0.6 * totalItems;
   const finalTotal = totalPrice + shipping;
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
-      <SheetContent className="flex flex-col w-full sm:max-w-lg">
+      <SheetContent className="flex flex-col w-full sm:max-w-lg py-4">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
             <ShoppingBag className="w-5 h-5" />
@@ -70,7 +71,7 @@ export function Cart({
               </Button>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-4 px-4">
               {items.map((item) => (
                 <div key={item.id} className="flex gap-4 p-4 border rounded-lg">
                   <div className="flex-shrink-0">
@@ -151,7 +152,7 @@ export function Cart({
         </div>
 
         {items.length > 0 && (
-          <div className="border-t pt-4 space-y-4">
+          <div className="border-t pt-4 space-y-4 px-4">
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span>
@@ -161,9 +162,11 @@ export function Cart({
               </div>
               <div className="flex justify-between text-sm">
                 <span>{t.shipping}</span>
-                <span>
-                  {shipping === 0 ? t.free : `€${shipping.toFixed(2)}`}
-                </span>
+                <span>{`€${shipping.toFixed(2)}`}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span>Taxes</span>
+                <span>{`€${taxes.toFixed(2)}`}</span>
               </div>
               {shipping === 0 && (
                 <p className="text-xs text-green-600">
