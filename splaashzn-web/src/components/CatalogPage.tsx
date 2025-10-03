@@ -3,16 +3,22 @@ import { Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductCard, Product, PersonalizationOption } from "./ProductCard";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 import { Badge } from "./ui/badge";
 import { Card, CardContent } from "./ui/card";
 import { Header } from "./Header";
-import { 
-  getUniqueTeams, 
-  getUniqueLeagues, 
-  getUniqueCountries, 
+import {
+  getUniqueTeams,
+  getUniqueLeagues,
+  getUniqueCountries,
   getUniqueJerseyTypes,
-  getUniqueSeasons 
+  getUniqueSeasons,
 } from "../data/products";
 
 interface CatalogPageProps {
@@ -22,9 +28,9 @@ interface CatalogPageProps {
   onSearchChange: (query: string) => void;
   searchQuery: string;
   onAddToCart: (
-    product: Product, 
-    selectedSize?: string, 
-    quantity?: number, 
+    product: Product,
+    selectedSize?: string,
+    quantity?: number,
     personalization?: {
       option: PersonalizationOption;
       playerName?: string;
@@ -35,14 +41,14 @@ interface CatalogPageProps {
   onProductClick: (product: Product) => void;
 }
 
-export function CatalogPage({ 
-  products, 
+export function CatalogPage({
+  products,
   cartItemCount,
   onCartClick,
   onSearchChange,
   searchQuery,
-  onAddToCart, 
-  onProductClick 
+  onAddToCart,
+  onProductClick,
 }: CatalogPageProps) {
   const [localSearchQuery, setLocalSearchQuery] = useState("");
   const [selectedTeam, setSelectedTeam] = useState("all");
@@ -65,32 +71,53 @@ export function CatalogPage({
 
   // Filter and sort products
   const { filteredProducts, totalPages } = useMemo(() => {
-    let filtered = products.filter(product => {
+    const filtered = products.filter((product) => {
       const searchTerm = localSearchQuery.toLowerCase();
-      const matchesSearch = !searchTerm || 
+      const matchesSearch =
+        !searchTerm ||
         product.name.toLowerCase().includes(searchTerm) ||
         product.team.toLowerCase().includes(searchTerm) ||
         product.league?.toLowerCase().includes(searchTerm) ||
         product.country?.toLowerCase().includes(searchTerm);
-      
-      const matchesTeam = selectedTeam === "all" || product.team === selectedTeam;
-      const matchesLeague = selectedLeague === "all" || product.league === selectedLeague;
-      const matchesCountry = selectedCountry === "all" || product.country === selectedCountry;
-      const matchesJerseyType = selectedJerseyType === "all" || product.jerseyType === selectedJerseyType;
-      const matchesSeason = selectedSeason === "all" || product.season === selectedSeason;
-      
-      const matchesPrice = priceRange === "all" || 
+
+      const matchesTeam =
+        selectedTeam === "all" || product.team === selectedTeam;
+      const matchesLeague =
+        selectedLeague === "all" || product.league === selectedLeague;
+      const matchesCountry =
+        selectedCountry === "all" || product.country === selectedCountry;
+      const matchesJerseyType =
+        selectedJerseyType === "all" ||
+        product.jerseyType === selectedJerseyType;
+      const matchesSeason =
+        selectedSeason === "all" || product.season === selectedSeason;
+
+      const matchesPrice =
+        priceRange === "all" ||
         (priceRange === "under-60" && product.price < 60) ||
-        (priceRange === "60-80" && product.price >= 60 && product.price <= 80) ||
-        (priceRange === "80-100" && product.price >= 80 && product.price <= 100) ||
+        (priceRange === "60-80" &&
+          product.price >= 60 &&
+          product.price <= 80) ||
+        (priceRange === "80-100" &&
+          product.price >= 80 &&
+          product.price <= 100) ||
         (priceRange === "over-100" && product.price > 100);
 
-      const matchesAvailability = availability === "all" ||
+      const matchesAvailability =
+        availability === "all" ||
         (availability === "in-stock" && product.inStock) ||
         (availability === "out-of-stock" && !product.inStock);
-      
-      return matchesSearch && matchesTeam && matchesLeague && matchesCountry && 
-             matchesJerseyType && matchesSeason && matchesPrice && matchesAvailability;
+
+      return (
+        matchesSearch &&
+        matchesTeam &&
+        matchesLeague &&
+        matchesCountry &&
+        matchesJerseyType &&
+        matchesSeason &&
+        matchesPrice &&
+        matchesAvailability
+      );
     });
 
     // Sort products
@@ -113,8 +140,18 @@ export function CatalogPage({
 
     const totalPages = Math.ceil(filtered.length / itemsPerPage);
     return { filteredProducts: filtered, totalPages };
-  }, [products, localSearchQuery, selectedTeam, selectedLeague, selectedCountry, 
-      selectedJerseyType, selectedSeason, priceRange, availability, sortBy]);
+  }, [
+    products,
+    localSearchQuery,
+    selectedTeam,
+    selectedLeague,
+    selectedCountry,
+    selectedJerseyType,
+    selectedSeason,
+    priceRange,
+    availability,
+    sortBy,
+  ]);
 
   // Get current page products
   const currentProducts = filteredProducts.slice(
@@ -135,9 +172,9 @@ export function CatalogPage({
     setCurrentPage(1);
   };
 
-  const activeFiltersCount = 
-    (localSearchQuery ? 1 : 0) + 
-    (selectedTeam !== "all" ? 1 : 0) + 
+  const activeFiltersCount =
+    (localSearchQuery ? 1 : 0) +
+    (selectedTeam !== "all" ? 1 : 0) +
     (selectedLeague !== "all" ? 1 : 0) +
     (selectedCountry !== "all" ? 1 : 0) +
     (selectedJerseyType !== "all" ? 1 : 0) +
@@ -147,7 +184,7 @@ export function CatalogPage({
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -164,7 +201,8 @@ export function CatalogPage({
         <div className="container mx-auto px-4">
           <h1 className="text-5xl font-bold mb-4">Catálogo de Camisetas</h1>
           <p className="text-xl text-purple-100 max-w-2xl">
-            Explora nuestra colección completa de más de 650 camisetas oficiales de los mejores equipos del mundo
+            Explora nuestra colección completa de más de 650 camisetas oficiales
+            de los mejores equipos del mundo
           </p>
         </div>
       </div>
@@ -187,7 +225,7 @@ export function CatalogPage({
                 </Button>
               )}
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-4">
               <div>
                 <label className="text-sm font-medium mb-2 block">Buscar</label>
@@ -200,20 +238,25 @@ export function CatalogPage({
                   }}
                 />
               </div>
-              
+
               <div>
                 <label className="text-sm font-medium mb-2 block">Liga</label>
-                <Select value={selectedLeague} onValueChange={(value) => {
-                  setSelectedLeague(value);
-                  setCurrentPage(1);
-                }}>
+                <Select
+                  value={selectedLeague}
+                  onValueChange={(value) => {
+                    setSelectedLeague(value);
+                    setCurrentPage(1);
+                  }}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Todas las ligas" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">Todas las ligas</SelectItem>
-                    {leagues.map(league => (
-                      <SelectItem key={league} value={league}>{league}</SelectItem>
+                    {leagues.map((league) => (
+                      <SelectItem key={league} value={league}>
+                        {league}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -221,17 +264,22 @@ export function CatalogPage({
 
               <div>
                 <label className="text-sm font-medium mb-2 block">Equipo</label>
-                <Select value={selectedTeam} onValueChange={(value) => {
-                  setSelectedTeam(value);
-                  setCurrentPage(1);
-                }}>
+                <Select
+                  value={selectedTeam}
+                  onValueChange={(value) => {
+                    setSelectedTeam(value);
+                    setCurrentPage(1);
+                  }}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Todos los equipos" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">Todos los equipos</SelectItem>
-                    {teams.map(team => (
-                      <SelectItem key={team} value={team}>{team}</SelectItem>
+                    {teams.map((team) => (
+                      <SelectItem key={team} value={team}>
+                        {team}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -239,17 +287,22 @@ export function CatalogPage({
 
               <div>
                 <label className="text-sm font-medium mb-2 block">País</label>
-                <Select value={selectedCountry} onValueChange={(value) => {
-                  setSelectedCountry(value);
-                  setCurrentPage(1);
-                }}>
+                <Select
+                  value={selectedCountry}
+                  onValueChange={(value) => {
+                    setSelectedCountry(value);
+                    setCurrentPage(1);
+                  }}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Todos los países" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">Todos los países</SelectItem>
-                    {countries.map(country => (
-                      <SelectItem key={country} value={country}>{country}</SelectItem>
+                    {countries.map((country) => (
+                      <SelectItem key={country} value={country}>
+                        {country}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -257,17 +310,22 @@ export function CatalogPage({
 
               <div>
                 <label className="text-sm font-medium mb-2 block">Tipo</label>
-                <Select value={selectedJerseyType} onValueChange={(value) => {
-                  setSelectedJerseyType(value);
-                  setCurrentPage(1);
-                }}>
+                <Select
+                  value={selectedJerseyType}
+                  onValueChange={(value) => {
+                    setSelectedJerseyType(value);
+                    setCurrentPage(1);
+                  }}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Todos los tipos" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">Todos los tipos</SelectItem>
-                    {jerseyTypes.map(type => (
-                      <SelectItem key={type} value={type}>{type}</SelectItem>
+                    {jerseyTypes.map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {type}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -276,29 +334,39 @@ export function CatalogPage({
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
-                <label className="text-sm font-medium mb-2 block">Temporada</label>
-                <Select value={selectedSeason} onValueChange={(value) => {
-                  setSelectedSeason(value);
-                  setCurrentPage(1);
-                }}>
+                <label className="text-sm font-medium mb-2 block">
+                  Temporada
+                </label>
+                <Select
+                  value={selectedSeason}
+                  onValueChange={(value) => {
+                    setSelectedSeason(value);
+                    setCurrentPage(1);
+                  }}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Todas las temporadas" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">Todas las temporadas</SelectItem>
-                    {seasons.map(season => (
-                      <SelectItem key={season} value={season}>{season}</SelectItem>
+                    {seasons.map((season) => (
+                      <SelectItem key={season} value={season}>
+                        {season}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
-              
+
               <div>
                 <label className="text-sm font-medium mb-2 block">Precio</label>
-                <Select value={priceRange} onValueChange={(value) => {
-                  setPriceRange(value);
-                  setCurrentPage(1);
-                }}>
+                <Select
+                  value={priceRange}
+                  onValueChange={(value) => {
+                    setPriceRange(value);
+                    setCurrentPage(1);
+                  }}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Todos los precios" />
                   </SelectTrigger>
@@ -313,11 +381,16 @@ export function CatalogPage({
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-2 block">Disponibilidad</label>
-                <Select value={availability} onValueChange={(value) => {
-                  setAvailability(value);
-                  setCurrentPage(1);
-                }}>
+                <label className="text-sm font-medium mb-2 block">
+                  Disponibilidad
+                </label>
+                <Select
+                  value={availability}
+                  onValueChange={(value) => {
+                    setAvailability(value);
+                    setCurrentPage(1);
+                  }}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Todos" />
                   </SelectTrigger>
@@ -328,9 +401,11 @@ export function CatalogPage({
                   </SelectContent>
                 </Select>
               </div>
-              
+
               <div>
-                <label className="text-sm font-medium mb-2 block">Ordenar por</label>
+                <label className="text-sm font-medium mb-2 block">
+                  Ordenar por
+                </label>
                 <Select value={sortBy} onValueChange={setSortBy}>
                   <SelectTrigger>
                     <SelectValue />
@@ -339,8 +414,12 @@ export function CatalogPage({
                     <SelectItem value="name">Nombre A-Z</SelectItem>
                     <SelectItem value="team">Equipo</SelectItem>
                     <SelectItem value="league">Liga</SelectItem>
-                    <SelectItem value="price-low">Precio: menor a mayor</SelectItem>
-                    <SelectItem value="price-high">Precio: mayor a menor</SelectItem>
+                    <SelectItem value="price-low">
+                      Precio: menor a mayor
+                    </SelectItem>
+                    <SelectItem value="price-high">
+                      Precio: mayor a menor
+                    </SelectItem>
                     <SelectItem value="newest">Más recientes</SelectItem>
                   </SelectContent>
                 </Select>
@@ -352,9 +431,12 @@ export function CatalogPage({
         {/* Resultados */}
         <div className="flex justify-between items-center mb-6">
           <p className="text-muted-foreground">
-            {filteredProducts.length} productos encontrados 
+            {filteredProducts.length} productos encontrados
             {filteredProducts.length > itemsPerPage && (
-              <span> - Página {currentPage} de {totalPages}</span>
+              <span>
+                {" "}
+                - Página {currentPage} de {totalPages}
+              </span>
             )}
           </p>
         </div>
@@ -402,7 +484,9 @@ export function CatalogPage({
                     return (
                       <Button
                         key={pageNum}
-                        variant={currentPage === pageNum ? "default" : "outline"}
+                        variant={
+                          currentPage === pageNum ? "default" : "outline"
+                        }
                         size="sm"
                         onClick={() => handlePageChange(pageNum)}
                       >
@@ -427,7 +511,8 @@ export function CatalogPage({
         ) : (
           <div className="text-center py-12">
             <p className="text-lg text-muted-foreground mb-4">
-              No se encontraron productos que coincidan con los filtros seleccionados.
+              No se encontraron productos que coincidan con los filtros
+              seleccionados.
             </p>
             <Button onClick={clearFilters}>Limpiar filtros</Button>
           </div>

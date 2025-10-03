@@ -4,7 +4,7 @@ import { AboutSection } from "../components/AboutSection";
 import { FeaturedProducts } from "../components/FeaturedProducts";
 import { Footer } from "../components/Footer";
 import { Product, PersonalizationOption } from "../components/ProductCard";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 interface HomePageProps {
   cartItemCount: number;
@@ -13,9 +13,9 @@ interface HomePageProps {
   searchQuery: string;
   featuredProducts: Product[];
   onAddToCart: (
-    product: Product, 
-    selectedSize?: string, 
-    quantity?: number, 
+    product: Product,
+    selectedSize?: string,
+    quantity?: number,
     personalization?: {
       option: PersonalizationOption;
       playerName?: string;
@@ -26,14 +26,14 @@ interface HomePageProps {
   onProductClick: (product: Product) => void;
 }
 
-export function HomePage({ 
-  cartItemCount, 
-  onCartClick, 
-  onSearchChange, 
-  searchQuery, 
+export function HomePage({
+  cartItemCount,
+  onCartClick,
+  onSearchChange,
+  searchQuery,
   featuredProducts,
   onAddToCart,
-  onProductClick
+  onProductClick,
 }: HomePageProps) {
   return (
     <>
@@ -43,7 +43,7 @@ export function HomePage({
         onSearchChange={onSearchChange}
         searchQuery={searchQuery}
       />
-      
+
       <main>
         <HeroSection />
         <AboutSection />
@@ -54,7 +54,7 @@ export function HomePage({
           onViewAllProducts={() => {}}
         />
       </main>
-      
+
       <Footer />
     </>
   );

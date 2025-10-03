@@ -131,7 +131,11 @@ export function ProductDetail({ product, isOpen, onClose, onAddToCart }: Product
                             />
                             <Label
                               htmlFor={size}
-                              className="flex items-center justify-center h-10 w-full border border-border rounded-md cursor-pointer peer-checked:border-primary peer-checked:bg-primary peer-checked:text-primary-foreground transition-colors"
+                              className={`flex items-center justify-center h-12 w-full border-2 rounded-lg cursor-pointer transition-all duration-200 font-semibold ${
+                                selectedSize === size 
+                                  ? 'border-primary bg-primary text-primary-foreground shadow-lg scale-105 ring-2 ring-primary/30' 
+                                  : 'border-border hover:border-primary/50 hover:bg-primary/5'
+                              }`}
                             >
                               {size}
                             </Label>
@@ -157,8 +161,12 @@ export function ProductDetail({ product, isOpen, onClose, onAddToCart }: Product
                         }
                       }}
                     >
-                      <div className="space-y-3">
-                        <div className="flex items-center space-x-3 p-3 border border-border rounded-lg">
+                      <div className="space-y-2">
+                        <div className={`flex items-center space-x-3 p-3 border rounded-lg transition-all duration-200 cursor-pointer ${
+                          !selectedPersonalization 
+                            ? 'border-primary bg-primary/10 shadow-md' 
+                            : 'border-border hover:border-primary/50 hover:bg-primary/5'
+                        }`}>
                           <RadioGroupItem value="" id="no-personalization" />
                           <Label htmlFor="no-personalization" className="flex-1 cursor-pointer">
                             <div className="font-medium">Sin personalización</div>
@@ -168,24 +176,28 @@ export function ProductDetail({ product, isOpen, onClose, onAddToCart }: Product
                         </div>
                         
                         {product.personalizationOptions.map((option) => (
-                          <div key={option.id} className="flex items-center space-x-3 p-3 border border-border rounded-lg">
+                          <div key={option.id} className={`flex items-center space-x-3 p-3 border rounded-lg transition-all duration-200 cursor-pointer ${
+                            selectedPersonalization?.id === option.id 
+                              ? 'border-primary bg-primary/10 shadow-md' 
+                              : 'border-border hover:border-primary/50 hover:bg-primary/5'
+                          }`}>
                             <RadioGroupItem value={option.id} id={option.id} />
                             <Label htmlFor={option.id} className="flex-1 cursor-pointer">
                               <div className="font-medium">{option.name}</div>
                               <div className="text-sm text-muted-foreground">{option.description}</div>
                             </Label>
-                            <span className="font-semibold">+€{option.price}</span>
+                            <span className="font-semibold text-primary">+€{option.price}</span>
                           </div>
                         ))}
                       </div>
                     </RadioGroup>
 
                     {selectedPersonalization && (
-                      <div className="mt-4 p-4 bg-muted/50 rounded-lg space-y-4">
+                      <div className="mt-4 p-4 bg-muted/30 border border-border rounded-lg space-y-3">
                         <h4 className="font-medium">Detalles de personalización:</h4>
                         
                         {(selectedPersonalization.id === "name-number" || selectedPersonalization.id === "name-number-patch") && (
-                          <div className="grid grid-cols-2 gap-4">
+                          <div className="grid grid-cols-2 gap-3">
                             <div>
                               <Label htmlFor="player-name" className="text-sm">Nombre del jugador</Label>
                               <Input
@@ -194,6 +206,7 @@ export function ProductDetail({ product, isOpen, onClose, onAddToCart }: Product
                                 value={playerName}
                                 onChange={(e) => setPlayerName(e.target.value.toUpperCase())}
                                 maxLength={12}
+                                className="mt-1"
                               />
                             </div>
                             <div>
@@ -207,6 +220,7 @@ export function ProductDetail({ product, isOpen, onClose, onAddToCart }: Product
                                 type="number"
                                 min="1"
                                 max="99"
+                                className="mt-1"
                               />
                             </div>
                           </div>
@@ -221,7 +235,7 @@ export function ProductDetail({ product, isOpen, onClose, onAddToCart }: Product
                               value={customText}
                               onChange={(e) => setCustomText(e.target.value)}
                               maxLength={20}
-                              className="h-20"
+                              className="mt-1 h-16 resize-none"
                             />
                           </div>
                         )}
@@ -255,18 +269,18 @@ export function ProductDetail({ product, isOpen, onClose, onAddToCart }: Product
                 
                 <div className="space-y-4">
                   {selectedPersonalization && getPersonalizationPrice() > 0 && (
-                    <div className="bg-primary/10 border border-primary/20 rounded-lg p-4">
+                    <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
                       <div className="flex justify-between items-center mb-2">
                         <span>Precio base:</span>
-                        <span>€{product.price.toFixed(2)}</span>
+                        <span className="font-semibold">€{product.price.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between items-center mb-2">
                         <span>Personalización:</span>
-                        <span>+€{getPersonalizationPrice().toFixed(2)}</span>
+                        <span className="font-semibold text-primary">+€{getPersonalizationPrice().toFixed(2)}</span>
                       </div>
-                      <div className="flex justify-between items-center font-semibold text-lg">
+                      <div className="flex justify-between items-center font-bold text-lg border-t border-primary/30 pt-2">
                         <span>Total por unidad:</span>
-                        <span>€{(product.price + getPersonalizationPrice()).toFixed(2)}</span>
+                        <span className="text-primary">€{(product.price + getPersonalizationPrice()).toFixed(2)}</span>
                       </div>
                     </div>
                   )}

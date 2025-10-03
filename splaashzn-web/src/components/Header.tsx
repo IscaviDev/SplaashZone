@@ -36,12 +36,6 @@ export function Header({
               >
                 Catálogo
               </Link>
-              <a
-                href="#ofertas"
-                className="text-foreground hover:text-primary transition-colors"
-              >
-                Ofertas
-              </a>
             </nav>
           </div>
 
