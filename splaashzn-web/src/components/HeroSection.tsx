@@ -23,7 +23,7 @@ export function HeroSection() {
           alt="Stadium background"
           className="w-full h-full object-cover opacity-20"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/90 via-teal-800/85 to-cyan-900/90"></div>
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/90 via-teal-800/85 to-cyan-900/90"></div> */}
       </div>
 
       <div className="container mx-auto px-4 py-20 relative z-10">
@@ -33,22 +33,22 @@ export function HeroSection() {
             {/* Badge */}
             <div className="inline-flex items-center px-4 py-2 bg-emerald-500/20 border border-emerald-400/30 rounded-full text-emerald-200 backdrop-blur-sm">
               <Star className="w-4 h-4 mr-2 fill-current" />
-              <span className="text-sm">La tienda oficial de camisetas</span>
+              <span className="text-sm">La tienda oficial de Splaashzn</span>
             </div>
 
             {/* Main Title */}
             <div className="space-y-6">
               <h1 className="text-6xl md:text-8xl font-black leading-none tracking-tight">
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-emerald-200">
-                  FUTBOL
+                  SPLAASH
                 </span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-cyan-300">
-                  SHOP
+                  ZONE
                 </span>
               </h1>
 
               <p className="text-xl md:text-2xl text-emerald-100 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                Descubre la colección más completa de camisetas oficiales.
+                Descubre la colección más completa de camisetas de fútbol.
                 <span className="text-emerald-300 font-semibold">
                   {" "}
                   Más de 650 productos
@@ -61,7 +61,7 @@ export function HeroSection() {
             <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
               <div className="flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
                 <Shield className="w-4 h-4 mr-2 text-emerald-300" />
-                <span className="text-sm">100% Oficial</span>
+                <span className="text-sm">Mejores precios </span>
               </div>
               <div className="flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
                 <Truck className="w-4 h-4 mr-2 text-emerald-300" />
