@@ -254,7 +254,7 @@ export function CatalogPage({
                   <SelectContent>
                     <SelectItem value="all">Todas las ligas</SelectItem>
                     {leagues.map((league) => (
-                      <SelectItem key={league} value={league}>
+                      <SelectItem key={league!} value={league!}>
                         {league}
                       </SelectItem>
                     ))}
@@ -300,7 +300,7 @@ export function CatalogPage({
                   <SelectContent>
                     <SelectItem value="all">Todos los países</SelectItem>
                     {countries.map((country) => (
-                      <SelectItem key={country} value={country}>
+                      <SelectItem key={country!} value={country!}>
                         {country}
                       </SelectItem>
                     ))}
@@ -323,7 +323,7 @@ export function CatalogPage({
                   <SelectContent>
                     <SelectItem value="all">Todos los tipos</SelectItem>
                     {jerseyTypes.map((type) => (
-                      <SelectItem key={type} value={type}>
+                      <SelectItem key={type!} value={type!}>
                         {type}
                       </SelectItem>
                     ))}
@@ -350,7 +350,7 @@ export function CatalogPage({
                   <SelectContent>
                     <SelectItem value="all">Todas las temporadas</SelectItem>
                     {seasons.map((season) => (
-                      <SelectItem key={season} value={season}>
+                      <SelectItem key={season!} value={season!}>
                         {season}
                       </SelectItem>
                     ))}

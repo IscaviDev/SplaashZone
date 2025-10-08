@@ -4,7 +4,7 @@ import { AboutSection } from "../components/AboutSection";
 import { FeaturedProducts } from "../components/FeaturedProducts";
 import { Footer } from "../components/Footer";
 import { Product, PersonalizationOption } from "../components/ProductCard";
-import { Link } from "react-router";
+// import { Link } from "react-router";
 
 interface HomePageProps {
   cartItemCount: number;
@@ -51,7 +51,7 @@ export function HomePage({
           products={featuredProducts}
           onAddToCart={onAddToCart}
           onProductClick={onProductClick}
-          onViewAllProducts={() => {}}
+          // onViewAllProducts={() => {}}
         />
       </main>
 
