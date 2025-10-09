@@ -43,7 +43,7 @@ export function Cart({
   const taxes = 0.6 * itemCount;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
+    <div className="fixed inset-0 z-50 overflow-hidden duration-200">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
 
       <div className="absolute right-0 top-0 h-full w-full max-w-md bg-background shadow-xl">

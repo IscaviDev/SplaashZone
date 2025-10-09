@@ -29,61 +29,107 @@ const teamsData = [
     name: "Real Madrid",
     league: "La Liga",
     country: "España",
-    priceRange: [85, 120],
+    priceRange: [10, 12],
+    personalizationOpt: [personalizationOptions[0]],
   },
   {
     name: "FC Barcelona",
     league: "La Liga",
     country: "España",
     priceRange: [85, 120],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Atlético de Madrid",
     league: "La Liga",
     country: "España",
     priceRange: [75, 105],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Sevilla FC",
     league: "La Liga",
     country: "España",
     priceRange: [65, 95],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Real Betis",
     league: "La Liga",
     country: "España",
     priceRange: [60, 90],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Valencia CF",
     league: "La Liga",
     country: "España",
     priceRange: [65, 95],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Athletic Bilbao",
     league: "La Liga",
     country: "España",
     priceRange: [70, 100],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Real Sociedad",
     league: "La Liga",
     country: "España",
     priceRange: [65, 95],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Villarreal CF",
     league: "La Liga",
     country: "España",
     priceRange: [65, 95],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Getafe CF",
     league: "La Liga",
     country: "España",
     priceRange: [55, 85],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
 
   // Premier League
@@ -92,60 +138,110 @@ const teamsData = [
     league: "Premier League",
     country: "Inglaterra",
     priceRange: [80, 115],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Manchester City",
     league: "Premier League",
     country: "Inglaterra",
     priceRange: [80, 115],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Liverpool FC",
     league: "Premier League",
     country: "Inglaterra",
     priceRange: [80, 115],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Chelsea FC",
     league: "Premier League",
     country: "Inglaterra",
     priceRange: [80, 115],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Arsenal FC",
     league: "Premier League",
     country: "Inglaterra",
     priceRange: [80, 115],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Tottenham",
     league: "Premier League",
     country: "Inglaterra",
     priceRange: [75, 110],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Newcastle United",
     league: "Premier League",
     country: "Inglaterra",
     priceRange: [70, 100],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Brighton",
     league: "Premier League",
     country: "Inglaterra",
     priceRange: [60, 90],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Aston Villa",
     league: "Premier League",
     country: "Inglaterra",
     priceRange: [65, 95],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "West Ham",
     league: "Premier League",
     country: "Inglaterra",
     priceRange: [65, 95],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
 
   // Serie A
@@ -154,43 +250,88 @@ const teamsData = [
     league: "Serie A",
     country: "Italia",
     priceRange: [75, 110],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "AC Milan",
     league: "Serie A",
     country: "Italia",
     priceRange: [75, 110],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Inter Milan",
     league: "Serie A",
     country: "Italia",
     priceRange: [75, 110],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "AS Roma",
     league: "Serie A",
     country: "Italia",
     priceRange: [70, 100],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "SSC Napoli",
     league: "Serie A",
     country: "Italia",
     priceRange: [70, 100],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
-  { name: "Lazio", league: "Serie A", country: "Italia", priceRange: [65, 95] },
+  {
+    name: "Lazio",
+    league: "Serie A",
+    country: "Italia",
+    priceRange: [65, 95],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
+  },
   {
     name: "Atalanta",
     league: "Serie A",
     country: "Italia",
     priceRange: [60, 90],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Fiorentina",
     league: "Serie A",
     country: "Italia",
     priceRange: [60, 90],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
 
   // Bundesliga
@@ -199,36 +340,66 @@ const teamsData = [
     league: "Bundesliga",
     country: "Alemania",
     priceRange: [80, 115],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Borussia Dortmund",
     league: "Bundesliga",
     country: "Alemania",
     priceRange: [75, 110],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "RB Leipzig",
     league: "Bundesliga",
     country: "Alemania",
     priceRange: [65, 95],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Bayer Leverkusen",
     league: "Bundesliga",
     country: "Alemania",
     priceRange: [65, 95],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Eintracht Frankfurt",
     league: "Bundesliga",
     country: "Alemania",
     priceRange: [60, 90],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Borussia M'gladbach",
     league: "Bundesliga",
     country: "Alemania",
     priceRange: [60, 90],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
 
   // Ligue 1
@@ -237,24 +408,44 @@ const teamsData = [
     league: "Ligue 1",
     country: "Francia",
     priceRange: [85, 120],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Olympique Marseille",
     league: "Ligue 1",
     country: "Francia",
     priceRange: [65, 95],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Olympique Lyon",
     league: "Ligue 1",
     country: "Francia",
     priceRange: [65, 95],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "AS Monaco",
     league: "Ligue 1",
     country: "Francia",
     priceRange: [70, 100],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
 
   // Selecciones
@@ -263,48 +454,88 @@ const teamsData = [
     league: "Internacional",
     country: "España",
     priceRange: [80, 110],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Selección Francesa",
     league: "Internacional",
     country: "Francia",
     priceRange: [80, 110],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Selección Italiana",
     league: "Internacional",
     country: "Italia",
     priceRange: [80, 110],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Selección Alemana",
     league: "Internacional",
     country: "Alemania",
     priceRange: [80, 110],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Selección Inglesa",
     league: "Internacional",
     country: "Inglaterra",
     priceRange: [80, 110],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Selección Brasileña",
     league: "Internacional",
     country: "Brasil",
     priceRange: [85, 115],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Selección Argentina",
     league: "Internacional",
     country: "Argentina",
     priceRange: [85, 115],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
   {
     name: "Selección Portuguesa",
     league: "Internacional",
     country: "Portugal",
     priceRange: [80, 110],
+    personalizationOpt: [
+      personalizationOptions[0],
+      personalizationOptions[1],
+      personalizationOptions[2],
+    ],
   },
 ];
 
@@ -380,7 +611,7 @@ function generateProducts(): Product[] {
             (a, b) => sizes.indexOf(a) - sizes.indexOf(b)
           ),
           inStock: isInStock,
-          personalizationOptions,
+          personalizationOptions: team.personalizationOpt,
         };
 
         products.push(product);

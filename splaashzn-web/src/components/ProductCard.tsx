@@ -32,15 +32,21 @@ interface ProductCardProps {
   onProductClick: (product: Product) => void;
 }
 
-export function ProductCard({ product, onAddToCart, onProductClick }: ProductCardProps) {
-  const discount = product.originalPrice 
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+export function ProductCard({
+  product,
+  onAddToCart,
+  onProductClick,
+}: ProductCardProps) {
+  const discount = product.originalPrice
+    ? Math.round(
+        ((product.originalPrice - product.price) / product.originalPrice) * 100
+      )
     : 0;
 
   return (
     <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg">
       <CardContent className="p-0">
-        <div 
+        <div
           className="relative overflow-hidden rounded-t-lg"
           onClick={() => onProductClick(product)}
         >
@@ -60,20 +66,22 @@ export function ProductCard({ product, onAddToCart, onProductClick }: ProductCar
             </Badge>
           )}
         </div>
-        
+
         <div className="p-4" onClick={() => onProductClick(product)}>
           <h3 className="font-semibold text-lg mb-1">{product.name}</h3>
           <p className="text-muted-foreground text-sm mb-2">{product.team}</p>
-          
+
           <div className="flex items-center space-x-2 mb-3">
-            <span className="text-lg font-bold text-primary">€{product.price}</span>
+            <span className="text-lg font-bold text-primary">
+              €{product.price}
+            </span>
             {product.originalPrice && (
               <span className="text-sm text-muted-foreground line-through">
                 €{product.originalPrice}
               </span>
             )}
           </div>
-          
+
           <div className="flex flex-wrap gap-1 mb-2">
             {product.sizes.slice(0, 4).map((size) => (
               <Badge key={size} variant="outline" className="text-xs">
@@ -86,9 +94,11 @@ export function ProductCard({ product, onAddToCart, onProductClick }: ProductCar
               </Badge>
             )}
           </div>
-          
+
           <div className="mb-3">
-            <p className="text-xs text-muted-foreground mb-1">Personalización disponible:</p>
+            <p className="text-xs text-muted-foreground mb-1">
+              Personalización disponible:
+            </p>
             <div className="flex flex-wrap gap-1">
               {product.personalizationOptions.slice(0, 2).map((option) => (
                 <Badge key={option.id} variant="secondary" className="text-xs">
@@ -104,10 +114,10 @@ export function ProductCard({ product, onAddToCart, onProductClick }: ProductCar
           </div>
         </div>
       </CardContent>
-      
+
       <CardFooter className="pt-0 pb-4 px-4">
-        <Button 
-          className="w-full" 
+        <Button
+          className="w-full"
           onClick={() => onAddToCart(product)}
           disabled={!product.inStock}
         >

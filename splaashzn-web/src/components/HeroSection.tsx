@@ -121,13 +121,13 @@ export function HeroSection() {
                 />
 
                 {/* Floating Elements */}
-                <div className="absolute -top-4 -right-4 bg-emerald-500 text-white px-4 py-2 rounded-full shadow-lg animate-bounce">
+                {/* <div className="absolute -top-4 -right-4 bg-emerald-500 text-white px-4 py-2 rounded-full shadow-lg animate-bounce">
                   <span className="text-sm font-semibold">¡Nuevo!</span>
-                </div>
+                </div> */}
 
-                <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-6 py-3 rounded-full shadow-lg">
+                {/* <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-6 py-3 rounded-full shadow-lg">
                   <span className="text-sm font-semibold">Personalizable</span>
-                </div>
+                </div> */}
               </div>
 
               {/* Decorative Elements */}
