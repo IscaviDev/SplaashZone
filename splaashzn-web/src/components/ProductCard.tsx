@@ -20,7 +20,7 @@ export interface Product {
   season?: string;
   price: number;
   originalPrice?: number;
-  image: string;
+  image: string[];
   sizes: string[];
   inStock: boolean;
   personalizationOptions: PersonalizationOption[];
@@ -51,7 +51,7 @@ export function ProductCard({
           onClick={() => onProductClick(product)}
         >
           <ImageWithFallback
-            src={product.image}
+            src={product.image[0]}
             alt={product.name}
             className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
           />

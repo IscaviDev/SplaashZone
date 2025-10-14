@@ -73,7 +73,7 @@ export function Cart({
                     className="flex gap-4 p-4 border border-border rounded-lg"
                   >
                     <ImageWithFallback
-                      src={item.image}
+                      src={item.image[0]}
                       alt={item.name}
                       className="w-16 h-16 object-cover rounded"
                     />

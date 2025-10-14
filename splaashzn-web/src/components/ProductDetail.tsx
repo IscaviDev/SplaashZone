@@ -9,6 +9,13 @@ import { Textarea } from "./ui/textarea";
 import { Separator } from "./ui/separator";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Product, PersonalizationOption } from "./ProductCard";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface ProductDetailProps {
   product: Product | null;
@@ -86,12 +93,33 @@ export function ProductDetail({
         <div className="flex h-full">
           <div className="flex-1 flex flex-col lg:flex-row">
             <div className="lg:w-1/2 p-6">
-              <div className="relative">
+              <div className="relative flex justify-center items-center min-h-full">
+                <Carousel className="max-w-xl">
+                  <CarouselContent>
+                    <CarouselItem className="flex items-center justify-center">
+                      <ImageWithFallback
+                        src={product.image[0]}
+                        alt={product.name}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    </CarouselItem>
+                    <CarouselItem className="flex items-center justify-center">
+                      <ImageWithFallback
+                        src={product.image[1]}
+                        alt={product.name}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    </CarouselItem>
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
+                {/* 
                 <ImageWithFallback
-                  src={product.image}
+                  src={product.image[0]}
                   alt={product.name}
                   className="w-full h-full object-cover rounded-lg"
-                />
+                /> */}
 
                 {discount > 0 && (
                   <Badge className="absolute top-4 left-4 bg-destructive text-destructive-foreground">

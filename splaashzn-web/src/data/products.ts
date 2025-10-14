@@ -606,7 +606,10 @@ function generateProducts(): Product[] {
           season: season,
           price: finalPrice,
           originalPrice: originalPrice,
-          image: sampleImages[Math.floor(Math.random() * sampleImages.length)],
+          image: [
+            sampleImages[Math.floor(Math.random() * sampleImages.length)],
+            sampleImages[Math.floor(Math.random() * sampleImages.length)],
+          ],
           sizes: availableSizes.sort(
             (a, b) => sizes.indexOf(a) - sizes.indexOf(b)
           ),
