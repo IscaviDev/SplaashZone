@@ -98,24 +98,17 @@ export function ProductDetail({
                 <div className="relative flex justify-center items-center min-h-full">
                   <Carousel className="max-w-xl max-h-xl">
                     <CarouselContent>
-                      <CarouselItem className="flex items-center justify-center">
-                        <ImageWithFallback
-                          src={product.image[0]}
-                          alt={product.name}
-                          className="rounded-lg"
-                        />
-                      </CarouselItem>
-                      <CarouselItem className="flex items-center justify-center">
-                        <ImageWithFallback
-                          src={product.image[1]}
-                          alt={product.name}
-                          className="rounded-lg"
-                        />
-                      </CarouselItem>
+                      {product.image.map((image) => (
+                        <CarouselItem className="flex items-center justify-center aspect-square overflow-hidden">
+                          <ImageWithFallback src={image} alt={product.name} />
+                        </CarouselItem>
+                      ))}
                     </CarouselContent>
                     {/* <div className="relative"> */}
-                    <CarouselPrevious className="left-[35%] top-[108%]" />
-                    <CarouselNext className="right-[35%] top-[108%]" />
+
+                    <CarouselPrevious className="-left-6 size-12" />
+                    <CarouselNext className="-right-6 size-12" />
+
                     {/* <CarouselPrevious />
                     <CarouselNext /> */}
                     {/* </div> */}
