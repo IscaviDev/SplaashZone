@@ -1,4 +1,8 @@
 import { Product, PersonalizationOption } from "../components/ProductCard";
+import img1 from "../assets/Capturas_Futbol/PremierLeague/ManchesterUnited/20_jersey1.png";
+import img2 from "../assets/Capturas_Futbol/PremierLeague/ManchesterUnited/20_jersey2.png";
+import img3 from "../assets/Capturas_Futbol/LaLiga/AtleticoMadrid/3_jersey1.png";
+import img4 from "../assets/Capturas_Futbol/LaLiga/AtleticoMadrid/3_jersey2.png";
 
 // Opciones de personalización disponibles
 export const personalizationOptions: PersonalizationOption[] = [
@@ -555,14 +559,15 @@ const seasons = ["2024/25", "2023/24", "2022/23", "Retro"];
 const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
 // Sample images for different team types
-const sampleImages = [
-  "https://images.unsplash.com/photo-1659081469066-c88ca2dec240?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb290YmFsbCUyMHNvY2NlciUyMGplcnNleSUyMHNoaXJ0fGVufDF8fHx8MTc1OTQ3NDM3OHww&ixlib=rb-4.1.0&q=80&w=1080",
-  // "https://images.unsplash.com/photo-1710301431051-ee6923af04aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2NjZXIlMjB0ZWFtJTIwdW5pZm9ybXxlbnwxfHx8fDE3NTk0NzQzNzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  // "https://images.unsplash.com/photo-1759447946445-397b1c034768?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb290YmFsbCUyMGtpdCUyMGplcnNleXxlbnwxfHx8fDE3NTk0NzQzNzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  "https://images.unsplash.com/photo-1614453966169-fd72db98e20f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2NjZXIlMjBwbGF5ZXIlMjBqZXJzZXl8ZW58MXx8fHwxNzU5NDc0Mzc5fDA&ixlib=rb-4.1.0&q=80&w=1080",
-  // "https://images.unsplash.com/photo-1751875184658-da1fcb0b8bab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb290YmFsbCUyMHNoaXJ0JTIwY29sbGVjdGlvbnxlbnwxfHx8fDE3NTk0NzQzODB8MA&ixlib=rb-4.1.0&q=80&w=1080",
-];
+// const sampleImages = [
+//   "https://images.unsplash.com/photo-1659081469066-c88ca2dec240?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb290YmFsbCUyMHNvY2NlciUyMGplcnNleSUyMHNoaXJ0fGVufDF8fHx8MTc1OTQ3NDM3OHww&ixlib=rb-4.1.0&q=80&w=1080",
+//   // "https://images.unsplash.com/photo-1710301431051-ee6923af04aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2NjZXIlMjB0ZWFtJTIwdW5pZm9ybXxlbnwxfHx8fDE3NTk0NzQzNzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+//   // "https://images.unsplash.com/photo-1759447946445-397b1c034768?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb290YmFsbCUyMGtpdCUyMGplcnNleXxlbnwxfHx8fDE3NTk0NzQzNzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+//   "https://images.unsplash.com/photo-1614453966169-fd72db98e20f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2NjZXIlMjBwbGF5ZXIlMjBqZXJzZXl8ZW58MXx8fHwxNzU5NDc0Mzc5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+//   // "https://images.unsplash.com/photo-1751875184658-da1fcb0b8bab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb290YmFsbCUyMHNoaXJ0JTIwY29sbGVjdGlvbnxlbnwxfHx8fDE3NTk0NzQzODB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+// ];
 
+const sampleImages = [img1, img2, img3, img4];
 function getRandomPrice(min: number, max: number): number {
   return Math.round((Math.random() * (max - min) + min) * 100) / 100;
 }
