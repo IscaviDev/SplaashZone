@@ -16,6 +16,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Dialog } from "@/components/ui/dialog";
 
 interface ProductDetailProps {
   product: Product | null;
