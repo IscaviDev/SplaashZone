@@ -145,6 +145,7 @@ export default function App() {
         <ProductDetail
           product={selectedProduct}
           isOpen={isProductDetailOpen}
+          onOpenChange={setIsProductDetailOpen}
           onClose={() => setIsProductDetailOpen(false)}
           onAddToCart={handleAddToCartFromDetail}
         />

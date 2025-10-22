@@ -2,7 +2,11 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { Badge } from "./ui/badge";
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 export interface PersonalizationOption {
   id: string;
   name: string;
@@ -68,7 +72,9 @@ export function ProductCard({
         </div>
 
         <div className="p-4" onClick={() => onProductClick(product)}>
-          <h3 className="font-semibold text-lg mb-1">{product.name}</h3>
+          <h3 className="font-semibold text-lg mb-1 line-clamp-1">
+            {product.name}
+          </h3>
           <p className="text-muted-foreground text-sm mb-2">{product.team}</p>
 
           <div className="flex items-center space-x-2 mb-3">
@@ -116,13 +122,20 @@ export function ProductCard({
       </CardContent>
 
       <CardFooter className="pt-0 pb-4 px-4">
-        <Button
-          className="w-full"
-          onClick={() => onAddToCart(product)}
-          disabled={!product.inStock}
-        >
-          {product.inStock ? "Añadir al carrito" : "No disponible"}
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              className="w-full cursor-pointer"
+              onClick={() => onAddToCart(product)}
+              disabled={!product.inStock}
+            >
+              {product.inStock ? "Añadir al carrito" : "No disponible"}
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Add to cart</p>
+          </TooltipContent>
+        </Tooltip>
       </CardFooter>
     </Card>
   );
