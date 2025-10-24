@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Minus, Plus } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
@@ -18,12 +18,12 @@ import {
 } from "@/components/ui/carousel";
 import {
   Dialog,
-  DialogClose,
+  // DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
+  // DialogDescription,
+  // DialogFooter,
+  // DialogHeader,
+  // DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 
@@ -102,10 +102,10 @@ export function ProductDetail({
       <DialogTrigger asChild>
         <Button variant="outline">Share</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-6xl h-[900px] overflow-y-scroll">
+      <DialogContent className="sm:max-w-6xl max-h-[700px] overflow-y-scroll">
         <div className="flex-1 flex flex-col lg:flex-row">
           <div className="lg:w-1/2 p-6">
-            <div className="relative flex justify-center items-center min-h-full">
+            <div className="flex justify-center items-center">
               <Carousel className="max-w-xl max-h-xl">
                 <CarouselContent>
                   {product.image.map((image) => (
@@ -118,12 +118,6 @@ export function ProductDetail({
                 <CarouselPrevious className="-left-6 size-12" />
                 <CarouselNext className="-right-6 size-12" />
               </Carousel>
-
-              {discount > 0 && (
-                <Badge className="absolute top-4 left-4 bg-destructive text-destructive-foreground">
-                  -{discount}%
-                </Badge>
-              )}
             </div>
           </div>
 

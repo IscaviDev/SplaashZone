@@ -45,44 +45,52 @@ export function Header({
           </div>
 
           <div className="flex items-center space-x-4">
-            <div className="relative hidden sm:block">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="relative"
-                    onClick={onCartClick}
-                  >
-                    <UserRound className="h-4 w-4" />
-                    {cartItemCount > 0 && (
-                      <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center">
-                        {cartItemCount}
-                      </Badge>
-                    )}
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Account</TooltipContent>
-              </Tooltip>
-            </div>
-
-            <Button
-              variant="outline"
-              size="icon"
-              className="relative"
-              onClick={onCartClick}
-            >
-              <ShoppingCart className="h-4 w-4" />
-              {cartItemCount > 0 && (
-                <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center">
-                  {cartItemCount}
-                </Badge>
-              )}
-            </Button>
-
-            <Button variant="outline" size="icon" className="md:hidden">
-              <Menu className="h-4 w-4" />
-            </Button>
+            {/* <div className="relative hidden sm:block"> */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="relative"
+                  onClick={onCartClick}
+                >
+                  <UserRound className="h-4 w-4" />
+                  {cartItemCount > 0 && (
+                    <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center">
+                      {cartItemCount}
+                    </Badge>
+                  )}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Account</TooltipContent>
+            </Tooltip>
+            {/* </div> */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="relative"
+                  onClick={onCartClick}
+                >
+                  <ShoppingCart className="h-4 w-4" />
+                  {cartItemCount > 0 && (
+                    <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center">
+                      {cartItemCount}
+                    </Badge>
+                  )}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Cart</TooltipContent>
+            </Tooltip>
+            {/* <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline" size="icon" className="md:hidden">
+                  <Menu className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Menu</TooltipContent>
+            </Tooltip> */}
           </div>
         </div>
       </div>

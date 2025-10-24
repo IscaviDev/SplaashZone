@@ -59,16 +59,16 @@ export function ProductCard({
             alt={product.name}
             className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          {discount > 0 && (
+          {/* {discount > 0 && (
             <Badge className="absolute top-2 left-2 bg-destructive text-destructive-foreground">
               -{discount}%
             </Badge>
-          )}
-          {!product.inStock && (
+          )} */}
+          {/* {!product.inStock && (
             <Badge variant="secondary" className="absolute top-2 right-2">
               Agotado
             </Badge>
-          )}
+          )} */}
         </div>
 
         <div className="p-4" onClick={() => onProductClick(product)}>
@@ -127,9 +127,9 @@ export function ProductCard({
             <Button
               className="w-full cursor-pointer"
               onClick={() => onAddToCart(product)}
-              disabled={!product.inStock}
+              // disabled={!product.inStock}
             >
-              {product.inStock ? "Añadir al carrito" : "No disponible"}
+              Añadir al carrito
             </Button>
           </TooltipTrigger>
           <TooltipContent>
