@@ -41,11 +41,11 @@ export function ProductCard({
   onAddToCart,
   onProductClick,
 }: ProductCardProps) {
-  const discount = product.originalPrice
-    ? Math.round(
-        ((product.originalPrice - product.price) / product.originalPrice) * 100
-      )
-    : 0;
+  // const discount = product.originalPrice
+  //   ? Math.round(
+  //       ((product.originalPrice - product.price) / product.originalPrice) * 100
+  //     )
+  //   : 0;
 
   return (
     <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg">
