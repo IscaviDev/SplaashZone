@@ -91,7 +91,6 @@ export function ProductDetail({
   const getTotalPrice = () => {
     return (product.price + getPersonalizationPrice()) * quantity;
   };
-
   const discount = product.originalPrice
     ? Math.round(
         ((product.originalPrice - product.price) / product.originalPrice) * 100

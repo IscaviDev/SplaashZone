@@ -6,12 +6,13 @@ import { Cart, CartItem } from "./components/Cart";
 import { ProductDetail } from "./components/ProductDetail";
 import { Product, PersonalizationOption } from "./components/ProductCard";
 import { allProducts } from "./data/products";
-
+import { SessionFormSection } from "./components/SessionFormSection";
 export default function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
+  const [isSessionFormOpen, setIsSessionFormOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   const addToCart = (
@@ -77,6 +78,9 @@ export default function App() {
     setIsProductDetailOpen(true);
   };
 
+  const handleSesionFormClick = () => {
+    setIsSessionFormOpen(true);
+  };
   const handleAddToCartFromDetail = (
     product: Product,
     selectedSize: string,
@@ -104,6 +108,7 @@ export default function App() {
               <HomePage
                 cartItemCount={cartItemCount}
                 onCartClick={() => setIsCartOpen(true)}
+                onUserClick={() => setIsSessionFormOpen(true)}
                 onSearchChange={setSearchQuery}
                 searchQuery={searchQuery}
                 featuredProducts={featuredProducts}
@@ -119,6 +124,7 @@ export default function App() {
                 products={allProducts}
                 cartItemCount={cartItemCount}
                 onCartClick={() => setIsCartOpen(true)}
+                onUserClick={() => setIsSessionFormOpen(true)}
                 onSearchChange={setSearchQuery}
                 searchQuery={searchQuery}
                 onAddToCart={addToCart}
@@ -148,6 +154,10 @@ export default function App() {
           onOpenChange={setIsProductDetailOpen}
           onClose={() => setIsProductDetailOpen(false)}
           onAddToCart={handleAddToCartFromDetail}
+        />
+        <SessionFormSection
+          isOpen={isSessionFormOpen}
+          onOpenChange={setIsSessionFormOpen}
         />
       </div>
     </Router>

@@ -4,11 +4,13 @@ import { AboutSection } from "../components/AboutSection";
 import { FeaturedProducts } from "../components/FeaturedProducts";
 import { Footer } from "../components/Footer";
 import { Product, PersonalizationOption } from "../components/ProductCard";
+
 // import { Link } from "react-router";
 
 interface HomePageProps {
   cartItemCount: number;
   onCartClick: () => void;
+  onUserClick: () => void;
   onSearchChange: (query: string) => void;
   searchQuery: string;
   featuredProducts: Product[];
@@ -29,6 +31,7 @@ interface HomePageProps {
 export function HomePage({
   cartItemCount,
   onCartClick,
+  onUserClick,
   onSearchChange,
   searchQuery,
   featuredProducts,
@@ -40,6 +43,7 @@ export function HomePage({
       <Header
         cartItemCount={cartItemCount}
         onCartClick={onCartClick}
+        onUserClick={onUserClick}
         onSearchChange={onSearchChange}
         searchQuery={searchQuery}
       />

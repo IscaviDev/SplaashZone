@@ -12,6 +12,7 @@ import {
 interface HeaderProps {
   cartItemCount: number;
   onCartClick: () => void;
+  onUserClick: () => void;
   onSearchChange: (query: string) => void;
   searchQuery: string;
 }
@@ -19,6 +20,7 @@ interface HeaderProps {
 export function Header({
   cartItemCount,
   onCartClick,
+  onUserClick,
   onSearchChange,
   searchQuery,
 }: HeaderProps) {
@@ -52,14 +54,14 @@ export function Header({
                   variant="outline"
                   size="icon"
                   className="relative"
-                  onClick={onCartClick}
+                  onClick={onUserClick}
                 >
                   <UserRound className="h-4 w-4" />
-                  {cartItemCount > 0 && (
+                  {/* {cartItemCount > 0 && (
                     <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center">
                       {cartItemCount}
                     </Badge>
-                  )}
+                  )} */}
                 </Button>
               </TooltipTrigger>
               <TooltipContent>Account</TooltipContent>

@@ -25,6 +25,7 @@ interface CatalogPageProps {
   products: Product[];
   cartItemCount: number;
   onCartClick: () => void;
+  onUserClick: () => void;
   onSearchChange: (query: string) => void;
   searchQuery: string;
   onAddToCart: (
@@ -45,6 +46,7 @@ export function CatalogPage({
   products,
   cartItemCount,
   onCartClick,
+  onUserClick,
   onSearchChange,
   searchQuery,
   onAddToCart,
@@ -192,6 +194,7 @@ export function CatalogPage({
       <Header
         cartItemCount={cartItemCount}
         onCartClick={onCartClick}
+        onUserClick={onUserClick}
         onSearchChange={onSearchChange}
         searchQuery={searchQuery}
       />
