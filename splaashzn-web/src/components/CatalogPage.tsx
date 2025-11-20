@@ -3,13 +3,7 @@ import { Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductCard, Product, PersonalizationOption } from "./ProductCard";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
+
 import { Badge } from "./ui/badge";
 import { Card, CardContent } from "./ui/card";
 import { Header } from "./Header";
@@ -20,7 +14,14 @@ import {
   getUniqueJerseyTypes,
   getUniqueSeasons,
 } from "../data/products";
-
+import {
+  MultiSelect,
+  MultiSelectContent,
+  MultiSelectGroup,
+  MultiSelectItem,
+  MultiSelectTrigger,
+  MultiSelectValue,
+} from "@/components/ui/multi-select";
 interface CatalogPageProps {
   products: Product[];
   cartItemCount: number;
@@ -53,14 +54,14 @@ export function CatalogPage({
   onProductClick,
 }: CatalogPageProps) {
   const [localSearchQuery, setLocalSearchQuery] = useState("");
-  const [selectedTeam, setSelectedTeam] = useState("all");
-  const [selectedLeague, setSelectedLeague] = useState("all");
-  const [selectedCountry, setSelectedCountry] = useState("all");
-  const [selectedJerseyType, setSelectedJerseyType] = useState("all");
-  const [selectedSeason, setSelectedSeason] = useState("all");
-  const [priceRange, setPriceRange] = useState("all");
-  const [availability, setAvailability] = useState("all");
-  const [sortBy, setSortBy] = useState("name");
+  const [selectedTeams, setSelectedTeams] = useState<string[]>([]);
+  const [selectedLeagues, setSelectedLeagues] = useState<string[]>([]);
+  const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
+  const [selectedJerseyTypes, setSelectedJerseyTypes] = useState<string[]>([]);
+  const [selectedSeasons, setSelectedSeasons] = useState<string[]>([]);
+  const [priceRanges, setPriceRanges] = useState<string[]>([]);
+  const [availabilities, setAvailabilities] = useState<string[]>([]);
+  const [sortBys, setSortBys] = useState<string[]>(["name"]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 24;
 
@@ -70,7 +71,6 @@ export function CatalogPage({
   const countries = getUniqueCountries();
   const jerseyTypes = getUniqueJerseyTypes();
   const seasons = getUniqueSeasons();
-
   // Filter and sort products
   const { filteredProducts, totalPages } = useMemo(() => {
     const filtered = products.filter((product) => {
@@ -83,32 +83,39 @@ export function CatalogPage({
         product.country?.toLowerCase().includes(searchTerm);
 
       const matchesTeam =
-        selectedTeam === "all" || product.team === selectedTeam;
+        selectedTeams.length === 0 || selectedTeams.includes(product.team);
       const matchesLeague =
-        selectedLeague === "all" || product.league === selectedLeague;
+        selectedLeagues.length === 0 ||
+        selectedLeagues.includes(product.league);
       const matchesCountry =
-        selectedCountry === "all" || product.country === selectedCountry;
+        selectedCountries.length === 0 ||
+        selectedCountries.includes(product.country);
       const matchesJerseyType =
-        selectedJerseyType === "all" ||
-        product.jerseyType === selectedJerseyType;
+        selectedJerseyTypes.length === 0 ||
+        selectedJerseyTypes.includes(product.jerseyType);
       const matchesSeason =
-        selectedSeason === "all" || product.season === selectedSeason;
+        selectedSeasons.length === 0 ||
+        selectedSeasons.includes(product.season);
 
       const matchesPrice =
-        priceRange === "all" ||
-        (priceRange === "under-60" && product.price < 60) ||
-        (priceRange === "60-80" &&
-          product.price >= 60 &&
-          product.price <= 80) ||
-        (priceRange === "80-100" &&
-          product.price >= 80 &&
-          product.price <= 100) ||
-        (priceRange === "over-100" && product.price > 100);
+        priceRanges.length === 0 ||
+        priceRanges.some(
+          (range) =>
+            (range === "under-60" && product.price < 60) ||
+            (range === "60-80" && product.price >= 60 && product.price <= 80) ||
+            (range === "80-100" &&
+              product.price >= 80 &&
+              product.price <= 100) ||
+            (range === "over-100" && product.price > 100)
+        );
 
       const matchesAvailability =
-        availability === "all" ||
-        (availability === "in-stock" && product.inStock) ||
-        (availability === "out-of-stock" && !product.inStock);
+        availabilities.length === 0 ||
+        availabilities.some(
+          (avail) =>
+            (avail === "in-stock" && product.inStock) ||
+            (avail === "out-of-stock" && !product.inStock)
+        );
 
       return (
         matchesSearch &&
@@ -123,6 +130,7 @@ export function CatalogPage({
     });
 
     // Sort products
+    const sortBy = sortBys.length > 0 ? sortBys[0] : "name";
     filtered.sort((a, b) => {
       switch (sortBy) {
         case "price-low":
@@ -145,14 +153,14 @@ export function CatalogPage({
   }, [
     products,
     localSearchQuery,
-    selectedTeam,
-    selectedLeague,
-    selectedCountry,
-    selectedJerseyType,
-    selectedSeason,
-    priceRange,
-    availability,
-    sortBy,
+    selectedTeams,
+    selectedLeagues,
+    selectedCountries,
+    selectedJerseyTypes,
+    selectedSeasons,
+    priceRanges,
+    availabilities,
+    sortBys,
   ]);
 
   // Get current page products
@@ -163,26 +171,26 @@ export function CatalogPage({
 
   const clearFilters = () => {
     setLocalSearchQuery("");
-    setSelectedTeam("all");
-    setSelectedLeague("all");
-    setSelectedCountry("all");
-    setSelectedJerseyType("all");
-    setSelectedSeason("all");
-    setPriceRange("all");
-    setAvailability("all");
-    setSortBy("name");
+    setSelectedTeams([]);
+    setSelectedLeagues([]);
+    setSelectedCountries([]);
+    setSelectedJerseyTypes([]);
+    setSelectedSeasons([]);
+    setPriceRanges([]);
+    setAvailabilities([]);
+    setSortBys(["name"]);
     setCurrentPage(1);
   };
 
   const activeFiltersCount =
     (localSearchQuery ? 1 : 0) +
-    (selectedTeam !== "all" ? 1 : 0) +
-    (selectedLeague !== "all" ? 1 : 0) +
-    (selectedCountry !== "all" ? 1 : 0) +
-    (selectedJerseyType !== "all" ? 1 : 0) +
-    (selectedSeason !== "all" ? 1 : 0) +
-    (priceRange !== "all" ? 1 : 0) +
-    (availability !== "all" ? 1 : 0);
+    (selectedTeams.length > 0 ? 1 : 0) +
+    (selectedLeagues.length > 0 ? 1 : 0) +
+    (selectedCountries.length > 0 ? 1 : 0) +
+    (selectedJerseyTypes.length > 0 ? 1 : 0) +
+    (selectedSeasons.length > 0 ? 1 : 0) +
+    (priceRanges.length > 0 ? 1 : 0) +
+    (availabilities.length > 0 ? 1 : 0);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -244,94 +252,98 @@ export function CatalogPage({
 
               <div>
                 <label className="text-sm font-medium mb-2 block">Liga</label>
-                <Select
-                  value={selectedLeague}
-                  onValueChange={(value) => {
-                    setSelectedLeague(value);
+                <MultiSelect
+                  values={selectedLeagues}
+                  onValuesChange={(values) => {
+                    setSelectedLeagues(values);
                     setCurrentPage(1);
                   }}
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Todas las ligas" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todas las ligas</SelectItem>
-                    {leagues.map((league) => (
-                      <SelectItem key={league!} value={league!}>
-                        {league}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                  <MultiSelectTrigger className="w-full max-w-[400px]">
+                    <MultiSelectValue placeholder="Seleccionar ligas..." />
+                  </MultiSelectTrigger>
+                  <MultiSelectContent>
+                    <MultiSelectGroup>
+                      {leagues.map((league) => (
+                        <MultiSelectItem key={league!} value={league!}>
+                          {league}
+                        </MultiSelectItem>
+                      ))}
+                    </MultiSelectGroup>
+                  </MultiSelectContent>
+                </MultiSelect>
               </div>
 
               <div>
                 <label className="text-sm font-medium mb-2 block">Equipo</label>
-                <Select
-                  value={selectedTeam}
-                  onValueChange={(value) => {
-                    setSelectedTeam(value);
+                <MultiSelect
+                  values={selectedTeams}
+                  onValuesChange={(values) => {
+                    setSelectedTeams(values);
                     setCurrentPage(1);
                   }}
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Todos los equipos" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todos los equipos</SelectItem>
-                    {teams.map((team) => (
-                      <SelectItem key={team} value={team}>
-                        {team}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                  <MultiSelectTrigger className="w-full max-w-[400px]">
+                    <MultiSelectValue placeholder="Seleccionar equipos..." />
+                  </MultiSelectTrigger>
+                  <MultiSelectContent>
+                    <MultiSelectGroup>
+                      {teams.map((team) => (
+                        <MultiSelectItem key={team} value={team}>
+                          {team}
+                        </MultiSelectItem>
+                      ))}
+                    </MultiSelectGroup>
+                  </MultiSelectContent>
+                </MultiSelect>
               </div>
 
               <div>
                 <label className="text-sm font-medium mb-2 block">País</label>
-                <Select
-                  value={selectedCountry}
-                  onValueChange={(value) => {
-                    setSelectedCountry(value);
+                <MultiSelect
+                  values={selectedCountries}
+                  onValuesChange={(values) => {
+                    setSelectedCountries(values);
                     setCurrentPage(1);
                   }}
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Todos los países" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todos los países</SelectItem>
-                    {countries.map((country) => (
-                      <SelectItem key={country!} value={country!}>
-                        {country}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                  <MultiSelectTrigger className="w-full max-w-[400px]">
+                    <MultiSelectValue placeholder="Seleccionar países..." />
+                  </MultiSelectTrigger>
+                  <MultiSelectContent>
+                    <MultiSelectGroup>
+                      {countries.map((country) => (
+                        <MultiSelectItem key={country!} value={country!}>
+                          {country}
+                        </MultiSelectItem>
+                      ))}
+                    </MultiSelectGroup>
+                  </MultiSelectContent>
+                </MultiSelect>
               </div>
 
               <div>
                 <label className="text-sm font-medium mb-2 block">Tipo</label>
-                <Select
-                  value={selectedJerseyType}
-                  onValueChange={(value) => {
-                    setSelectedJerseyType(value);
+                <MultiSelect
+                  values={selectedJerseyTypes}
+                  onValuesChange={(values) => {
+                    setSelectedJerseyTypes(values);
                     setCurrentPage(1);
                   }}
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Todos los tipos" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todos los tipos</SelectItem>
-                    {jerseyTypes.map((type) => (
-                      <SelectItem key={type!} value={type!}>
-                        {type}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                  <MultiSelectTrigger className="w-full max-w-[400px]">
+                    <MultiSelectValue placeholder="Seleccionar tipos..." />
+                  </MultiSelectTrigger>
+                  <MultiSelectContent>
+                    <MultiSelectGroup>
+                      {jerseyTypes.map((type) => (
+                        <MultiSelectItem key={type!} value={type!}>
+                          {type}
+                        </MultiSelectItem>
+                      ))}
+                    </MultiSelectGroup>
+                  </MultiSelectContent>
+                </MultiSelect>
               </div>
             </div>
 
@@ -340,92 +352,114 @@ export function CatalogPage({
                 <label className="text-sm font-medium mb-2 block">
                   Temporada
                 </label>
-                <Select
-                  value={selectedSeason}
-                  onValueChange={(value) => {
-                    setSelectedSeason(value);
+                <MultiSelect
+                  values={selectedSeasons}
+                  onValuesChange={(values) => {
+                    setSelectedSeasons(values);
                     setCurrentPage(1);
                   }}
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Todas las temporadas" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todas las temporadas</SelectItem>
-                    {seasons.map((season) => (
-                      <SelectItem key={season!} value={season!}>
-                        {season}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                  <MultiSelectTrigger className="w-full max-w-[400px]">
+                    <MultiSelectValue placeholder="Seleccionar temporadas..." />
+                  </MultiSelectTrigger>
+                  <MultiSelectContent>
+                    <MultiSelectGroup>
+                      {seasons.map((season) => (
+                        <MultiSelectItem key={season!} value={season!}>
+                          {season}
+                        </MultiSelectItem>
+                      ))}
+                    </MultiSelectGroup>
+                  </MultiSelectContent>
+                </MultiSelect>
               </div>
 
               <div>
                 <label className="text-sm font-medium mb-2 block">Precio</label>
-                <Select
-                  value={priceRange}
-                  onValueChange={(value) => {
-                    setPriceRange(value);
+                <MultiSelect
+                  values={priceRanges}
+                  onValuesChange={(values) => {
+                    setPriceRanges(values);
                     setCurrentPage(1);
                   }}
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Todos los precios" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todos los precios</SelectItem>
-                    <SelectItem value="under-60">Menos de €60</SelectItem>
-                    <SelectItem value="60-80">€60 - €80</SelectItem>
-                    <SelectItem value="80-100">€80 - €100</SelectItem>
-                    <SelectItem value="over-100">Más de €100</SelectItem>
-                  </SelectContent>
-                </Select>
+                  <MultiSelectTrigger className="w-full max-w-[400px]">
+                    <MultiSelectValue placeholder="Seleccionar precios..." />
+                  </MultiSelectTrigger>
+                  <MultiSelectContent>
+                    <MultiSelectGroup>
+                      <MultiSelectItem value="under-60">
+                        Menos de €60
+                      </MultiSelectItem>
+                      <MultiSelectItem value="60-80">€60 - €80</MultiSelectItem>
+                      <MultiSelectItem value="80-100">
+                        €80 - €100
+                      </MultiSelectItem>
+                      <MultiSelectItem value="over-100">
+                        Más de €100
+                      </MultiSelectItem>
+                    </MultiSelectGroup>
+                  </MultiSelectContent>
+                </MultiSelect>
               </div>
 
               <div>
                 <label className="text-sm font-medium mb-2 block">
                   Disponibilidad
                 </label>
-                <Select
-                  value={availability}
-                  onValueChange={(value) => {
-                    setAvailability(value);
+                <MultiSelect
+                  values={availabilities}
+                  onValuesChange={(values) => {
+                    setAvailabilities(values);
                     setCurrentPage(1);
                   }}
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Todos" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Todos</SelectItem>
-                    <SelectItem value="in-stock">En stock</SelectItem>
-                    <SelectItem value="out-of-stock">Agotado</SelectItem>
-                  </SelectContent>
-                </Select>
+                  <MultiSelectTrigger className="w-full max-w-[400px]">
+                    <MultiSelectValue placeholder="Seleccionar disponibilidad..." />
+                  </MultiSelectTrigger>
+                  <MultiSelectContent>
+                    <MultiSelectGroup>
+                      <MultiSelectItem value="in-stock">
+                        En stock
+                      </MultiSelectItem>
+                      <MultiSelectItem value="out-of-stock">
+                        Agotado
+                      </MultiSelectItem>
+                    </MultiSelectGroup>
+                  </MultiSelectContent>
+                </MultiSelect>
               </div>
 
               <div>
                 <label className="text-sm font-medium mb-2 block">
                   Ordenar por
                 </label>
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="name">Nombre A-Z</SelectItem>
-                    <SelectItem value="team">Equipo</SelectItem>
-                    <SelectItem value="league">Liga</SelectItem>
-                    <SelectItem value="price-low">
-                      Precio: menor a mayor
-                    </SelectItem>
-                    <SelectItem value="price-high">
-                      Precio: mayor a menor
-                    </SelectItem>
-                    <SelectItem value="newest">Más recientes</SelectItem>
-                  </SelectContent>
-                </Select>
+                <MultiSelect
+                  values={sortBys}
+                  onValuesChange={(values) => {
+                    setSortBys(values);
+                  }}
+                >
+                  <MultiSelectTrigger className="w-full max-w-[400px]">
+                    <MultiSelectValue placeholder="Seleccionar orden..." />
+                  </MultiSelectTrigger>
+                  <MultiSelectContent>
+                    <MultiSelectGroup>
+                      <MultiSelectItem value="name">Nombre A-Z</MultiSelectItem>
+                      <MultiSelectItem value="team">Equipo</MultiSelectItem>
+                      <MultiSelectItem value="league">Liga</MultiSelectItem>
+                      <MultiSelectItem value="price-low">
+                        Precio: menor a mayor
+                      </MultiSelectItem>
+                      <MultiSelectItem value="price-high">
+                        Precio: mayor a menor
+                      </MultiSelectItem>
+                      <MultiSelectItem value="newest">
+                        Más recientes
+                      </MultiSelectItem>
+                    </MultiSelectGroup>
+                  </MultiSelectContent>
+                </MultiSelect>
               </div>
             </div>
           </CardContent>
