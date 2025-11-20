@@ -99,7 +99,7 @@ export function ProductDetail({
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
-        <Button variant="outline">Share</Button>
+        {/* <Button variant="outline">Share</Button> */}
       </DialogTrigger>
       <DialogContent className="sm:max-w-6xl max-h-[700px] overflow-y-scroll">
         <div className="flex-1 flex flex-col lg:flex-row">
