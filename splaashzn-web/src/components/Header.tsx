@@ -53,7 +53,7 @@ export function Header({
                 <Button
                   variant="outline"
                   size="icon"
-                  className="relative"
+                  className="relative cursor-pointer"
                   onClick={onUserClick}
                 >
                   <UserRound className="h-4 w-4" />
@@ -72,7 +72,7 @@ export function Header({
                 <Button
                   variant="outline"
                   size="icon"
-                  className="relative"
+                  className="relative cursor-pointer"
                   onClick={onCartClick}
                 >
                   <ShoppingCart className="h-4 w-4" />

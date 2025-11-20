@@ -45,61 +45,95 @@ export function SessionFormSection({
 }: SessionFormSectionProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogTrigger asChild>
-        {/* <Button variant="outline">Share</Button> */}
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-2xl flex items-center justify-center max-h-[700px]">
-        <div className="flex w-full max-w-md flex-col gap-6">
+      <DialogTrigger asChild></DialogTrigger>
+      <DialogContent className="sm:max-w-3xl flex items-center justify-center max-h-[700px]">
+        <div className="flex w-full max-w-2xl flex-col gap-6">
           <Tabs defaultValue="account">
             <TabsList className="flex items-center justify-center w-full">
-              <TabsTrigger value="login">Sign In</TabsTrigger>
-              <TabsTrigger value="Register">Get Started</TabsTrigger>
+              <TabsTrigger value="login" className="cursor-pointer">
+                Sign In
+              </TabsTrigger>
+              <TabsTrigger value="getStarted" className="cursor-pointer">
+                Get Started
+              </TabsTrigger>
             </TabsList>
             <TabsContent value="login">
               <Card>
                 <CardHeader>
-                  <CardTitle>Login</CardTitle>
-                  <CardDescription>
-                    Make changes to your account here. Click save when
-                    you&apos;re done.
-                  </CardDescription>
+                  <CardTitle className="flex justify-center items-center">
+                    Sign In
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="grid gap-6">
                   <div className="grid gap-3">
-                    <Label htmlFor="tabs-demo-name">Name</Label>
-                    <Input id="tabs-demo-name" defaultValue="Pedro Duarte" />
+                    <Label htmlFor="tabs-demo-name">Username</Label>
+                    <Input id="tabs-demo-name" defaultValue="" />
                   </div>
                   <div className="grid gap-3">
-                    <Label htmlFor="tabs-demo-username">Username</Label>
-                    <Input id="tabs-demo-username" defaultValue="@peduarte" />
+                    <Label htmlFor="tabs-demo-username">Password</Label>
+                    <Input
+                      id="tabs-demo-username"
+                      type="password"
+                      defaultValue=""
+                    />
                   </div>
                 </CardContent>
-                <CardFooter>
-                  <Button>Save changes</Button>
+                <CardFooter className="flex items-center justify-center">
+                  <Button className="w-full cursor-pointer">Sign In</Button>
                 </CardFooter>
               </Card>
             </TabsContent>
-            <TabsContent value="Register">
+            <TabsContent value="getStarted">
               <Card>
                 <CardHeader>
-                  <CardTitle>Register</CardTitle>
-                  <CardDescription>
-                    Change your password here. After saving, you&apos;ll be
-                    logged out.
-                  </CardDescription>
+                  <CardTitle className="flex justify-center items-center">
+                    Create Account
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="grid gap-6">
-                  <div className="grid gap-3">
-                    <Label htmlFor="tabs-demo-current">Current password</Label>
-                    <Input id="tabs-demo-current" type="password" />
+                  <div className="flex gap-10">
+                    <div className="grid gap-2">
+                      <Label htmlFor="tabs-demo-current">Name</Label>
+                      <Input id="tabs-demo-current" className="w-[105%] py-2" />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="tabs-demo-current">First Surname</Label>
+                      <Input id="tabs-demo-current" className="w-[105%]" />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="tabs-demo-current">Second Surname</Label>
+                      <Input id="tabs-demo-current" className="w-[105%]" />
+                    </div>
                   </div>
-                  <div className="grid gap-3">
-                    <Label htmlFor="tabs-demo-new">New password</Label>
-                    <Input id="tabs-demo-new" type="password" />
+                  <div className="flex gap-10">
+                    <div className="grid gap-2">
+                      <Label htmlFor="tabs-demo-current">Email</Label>
+                      <Input
+                        id="tabs-demo-current"
+                        type="email"
+                        className="w-[105%] py-2"
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="tabs-demo-current">Password</Label>
+                      <Input
+                        id="tabs-demo-current"
+                        type="password"
+                        className="w-[105%]"
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="tabs-demo-current">Repeat Password</Label>
+                      <Input
+                        id="tabs-demo-current"
+                        type="password"
+                        className="w-[105%]"
+                      />
+                    </div>
                   </div>
                 </CardContent>
-                <CardFooter>
-                  <Button>Save password</Button>
+                <CardFooter className="flex items-center justify-center">
+                  <Button className="w-[100%] cursor-pointer">Sign Up</Button>
                 </CardFooter>
               </Card>
             </TabsContent>
