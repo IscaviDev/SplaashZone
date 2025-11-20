@@ -34,7 +34,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
+import {
+  PasswordInput,
+  PasswordInputStrengthChecker,
+} from "@/components/ui/password-input";
 interface SessionFormSectionProps {
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
@@ -67,15 +70,17 @@ export function SessionFormSection({
                 <CardContent className="grid gap-6">
                   <div className="grid gap-3">
                     <Label htmlFor="tabs-demo-name">Username</Label>
-                    <Input id="tabs-demo-name" defaultValue="" />
+                    <Input
+                      id="ta bs-demo-name"
+                      defaultValue=""
+                      placeholder="Email"
+                    />
                   </div>
                   <div className="grid gap-3">
                     <Label htmlFor="tabs-demo-username">Password</Label>
-                    <Input
-                      id="tabs-demo-username"
-                      type="password"
-                      defaultValue=""
-                    />
+                    <PasswordInput placeholder="Password">
+                      <PasswordInputStrengthChecker />
+                    </PasswordInput>
                   </div>
                 </CardContent>
                 <CardFooter className="flex items-center justify-center">
@@ -91,44 +96,63 @@ export function SessionFormSection({
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="grid gap-6">
-                  <div className="flex gap-10">
+                  <div className="flex gap-6">
                     <div className="grid gap-2">
                       <Label htmlFor="tabs-demo-current">Name</Label>
-                      <Input id="tabs-demo-current" className="w-[105%] py-2" />
+                      <Input
+                        id="tabs-demo-current"
+                        className="w-[95%] py-2"
+                        placeholder="Name"
+                      />
                     </div>
                     <div className="grid gap-2">
                       <Label htmlFor="tabs-demo-current">First Surname</Label>
-                      <Input id="tabs-demo-current" className="w-[105%]" />
+                      <Input
+                        id="tabs-demo-current"
+                        className="w-[100%]"
+                        placeholder="First Surname"
+                      />
                     </div>
-                    <div className="grid gap-2">
+                    <div className="grid gap-2 ml-5">
                       <Label htmlFor="tabs-demo-current">Second Surname</Label>
-                      <Input id="tabs-demo-current" className="w-[105%]" />
+                      <Input
+                        id="tabs-demo-current"
+                        className="w-[100%]"
+                        placeholder="Second Surname"
+                      />
                     </div>
                   </div>
                   <div className="flex gap-10">
-                    <div className="grid gap-2">
+                    <div className="grid gap-2 mb-10">
                       <Label htmlFor="tabs-demo-current">Email</Label>
                       <Input
                         id="tabs-demo-current"
                         type="email"
                         className="w-[105%] py-2"
+                        placeholder="Email"
                       />
                     </div>
                     <div className="grid gap-2">
                       <Label htmlFor="tabs-demo-current">Password</Label>
-                      <Input
+                      <PasswordInput placeholder="Password">
+                        <PasswordInputStrengthChecker />
+                      </PasswordInput>
+                      {/* <Input
                         id="tabs-demo-current"
                         type="password"
                         className="w-[105%]"
-                      />
+                      /> */}
                     </div>
                     <div className="grid gap-2">
                       <Label htmlFor="tabs-demo-current">Repeat Password</Label>
-                      <Input
+                      <PasswordInput placeholder="Repeat Password">
+                        <PasswordInputStrengthChecker />
+                      </PasswordInput>
+                      {/* <Input
                         id="tabs-demo-current"
                         type="password"
                         className="w-[105%]"
-                      />
+                      /> */}
                     </div>
                   </div>
                 </CardContent>
@@ -139,52 +163,6 @@ export function SessionFormSection({
             </TabsContent>
           </Tabs>
         </div>
-        {/* <Card className="w-full max-w-sm">
-          <CardHeader>
-            <CardTitle>Login to your account</CardTitle>
-            <CardDescription>
-              Enter your email below to login to your account
-            </CardDescription>
-            <CardAction>
-              <Button variant="link">Sign Up</Button>
-            </CardAction>
-          </CardHeader>
-          <CardContent>
-            <form>
-              <div className="flex flex-col gap-6">
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="m@example.com"
-                    required
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
-                    <a
-                      href="#"
-                      className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                    >
-                      Forgot your password?
-                    </a>
-                  </div>
-                  <Input id="password" type="password" required />
-                </div>
-              </div>
-            </form>
-          </CardContent>
-          <CardFooter className="flex-col gap-2">
-            <Button type="submit" className="w-full">
-              Login
-            </Button>
-            <Button variant="outline" className="w-full">
-              Login with Google
-            </Button>
-          </CardFooter>
-        </Card> */}
       </DialogContent>
     </Dialog>
   );
