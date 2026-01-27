@@ -78,9 +78,6 @@ export default function App() {
     setIsProductDetailOpen(true);
   };
 
-  const handleSesionFormClick = () => {
-    setIsSessionFormOpen(true);
-  };
   const handleAddToCartFromDetail = (
     product: Product,
     selectedSize: string,
