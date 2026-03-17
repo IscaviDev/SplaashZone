@@ -569,7 +569,9 @@ const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
 const sampleImages = [img1, img2, img3, img4];
 function getRandomPrice(min: number, max: number): number {
-  return Math.round((Math.random() * (max - min) + min) * 100) / 100;
+  return Math.round(
+    Math.round((Math.random() * (max - min) + min) * 100) / 100,
+  );
 }
 
 function getRandomElements<T>(array: T[], count: number): T[] {
@@ -587,7 +589,7 @@ function generateProducts(): Product[] {
       seasons.forEach((season) => {
         const basePrice = getRandomPrice(
           team.priceRange[0],
-          team.priceRange[1]
+          team.priceRange[1],
         );
         const hasDiscount = Math.random() < 0.3; // 30% chance of discount
         const originalPrice = hasDiscount
@@ -598,7 +600,7 @@ function generateProducts(): Product[] {
         const isInStock = Math.random() < 0.85; // 85% chance of being in stock
         const availableSizes = getRandomElements(
           sizes,
-          Math.floor(Math.random() * 4) + 3
+          Math.floor(Math.random() * 4) + 3,
         ); // 3-6 sizes
 
         const product: Product = {
@@ -616,7 +618,7 @@ function generateProducts(): Product[] {
             sampleImages[Math.floor(Math.random() * sampleImages.length)],
           ],
           sizes: availableSizes.sort(
-            (a, b) => sizes.indexOf(a) - sizes.indexOf(b)
+            (a, b) => sizes.indexOf(a) - sizes.indexOf(b),
           ),
           inStock: isInStock,
           personalizationOptions: team.personalizationOpt,

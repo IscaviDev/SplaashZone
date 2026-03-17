@@ -33,13 +33,13 @@ export function Header({
             <nav className="hidden md:flex space-x-6">
               <Link
                 to="/"
-                className="text-foreground hover:text-primary transition-colors"
+                className="text-foreground border-b-2 border-white px-2 hover:duration-400 hover:border-cyan-600 transition-colors"
               >
                 Inicio
               </Link>
               <Link
                 to="/catalog"
-                className="text-foreground hover:text-primary transition-colors"
+                className="border-b-2 border-white px-2 hover:duration-400 hover:border-cyan-600 transition-colors"
               >
                 Catálogo
               </Link>
@@ -53,7 +53,7 @@ export function Header({
                 <Button
                   variant="outline"
                   size="icon"
-                  className="relative cursor-pointer"
+                  className="relative cursor-pointer hover:border-cyan-700"
                   onClick={onUserClick}
                 >
                   <UserRound className="h-4 w-4" />
@@ -72,7 +72,7 @@ export function Header({
                 <Button
                   variant="outline"
                   size="icon"
-                  className="relative cursor-pointer"
+                  className="relative cursor-pointer hover:border-cyan-700"
                   onClick={onCartClick}
                 >
                   <ShoppingCart className="h-4 w-4" />
